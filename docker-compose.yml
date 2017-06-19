@@ -4,8 +4,13 @@ services:
   rabbitmq:
     image: rabbitmq:3
     env_file: ./config
+    hostname: rabbitmq
   mariadb:
     image: mariadb:10.1.22
     env_file: ./config
+    hostname: mariadb
     volumes:
       - ironic_database:/var/lib/mysql
+
+volumes:
+  ironic_database:
