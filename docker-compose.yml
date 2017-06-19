@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3
+    env_file: ./config
+  mariadb:
+    image: mariadb:10.1.22
+    env_file: ./config
+    volumes:
+      - ironic_database:/var/lib/mysql
