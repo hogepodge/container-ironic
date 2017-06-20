@@ -5,6 +5,11 @@ RABBITMQ_DEFAULT_PASS=rabbitpass
 # MariaDB credentials
 MYSQL_ROOT_PASSWORD=mysqlpass
 MYSQL_IRONIC_PASSWORD=ironicpass
+MYSQL_KEYSTONE_PASSWORD=keystonepass
+
+# Keystone Settings
+KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
+KEYSTONE_HOSTNAME=control
 
 # dnsmasq settings
 IPMI_INTERFACE=eno1

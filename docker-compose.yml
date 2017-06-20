@@ -5,12 +5,22 @@ services:
     image: rabbitmq:3
     env_file: ./config
     hostname: rabbitmq
+    restart: unless-stopped
   mariadb:
     image: mariadb:10.1.22
     env_file: ./config
     hostname: mariadb
     volumes:
       - ironic_database:/var/lib/mysql
+    restart: unless-stopped
+  keystone_api:
+    image: keystone_api:centos
+    env_file: ./config
+    hostname: keystone
+    ports:
+      - '5000:5000'
+    expose:
+      - '35357'
 
 volumes:
   ironic_database:
