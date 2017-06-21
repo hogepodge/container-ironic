@@ -19,8 +19,18 @@ services:
     hostname: keystone
     ports:
       - '5000:5000'
-    expose:
-      - '35357'
+      - '35357:35357'
+  bootstrap:
+    image: bootstrap:centos
+    env_file: ./config
+  glance_database:
+    image: glance_database:centos
+    env_file: ./config
+  glance_api:
+    image: glance_api:centos
+    env_file: ./config
+    ports:
+      - '9292:9292'
 
 volumes:
   ironic_database:

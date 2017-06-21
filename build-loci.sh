@@ -28,8 +28,7 @@ function loci_build () {
 #loci_reqs_build
 
 loci_build keystone
-#loci_build glance
-#loci_build nova
-#loci_build neutron
-#loci_build cinder
-#loci_build heat
+loci_build glance
+loci_build nova
+loci_build neutron
+loci_build cinder

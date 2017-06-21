@@ -1,0 +1,2 @@
+FROM openstackclient:centos
+
