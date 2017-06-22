@@ -1,7 +1,7 @@
-docker build keystone/keystone_base/. --tag keystone_base:centos
-docker build keystone/keystone_api/. --tag keystone_api:centos
-docker build glance/base/. --tag glance_base:centos
-docker build glance/database/. --tag glance_database:centos
-docker build glance/api/. --tag glance_api:centos
-docker build client/. --tag openstackclient:centos
-docker build bootstrap/. --tag bootstrap:centos
+docker build keystone/base/. --tag keystone-base:centos
+docker build keystone/api/. --tag keystone-api:centos
+docker build glance/base/. --tag glance-base:centos
+docker build glance/database/. --tag glance-database:centos
+docker build glance/api/. --tag glance-api:centos
+docker build openstack-client/. --tag openstack-client:centos
+docker build service-endpoints/. --tag service-endpoints:centos

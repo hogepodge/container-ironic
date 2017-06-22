@@ -49,7 +49,7 @@ function initialize_service() {
 export OS_USERNAME=admin
 export OS_PASSWORD=${KEYSTONE_ADMIN_PASSWORD}
 export OS_TENANT_NAME=admin
-export OS_AUTH_URL=http://${KEYSTONE_HOSTNAME}:5000
+export OS_AUTH_URL=http://${CONTROL_HOST}:5000
 export OS_REGION_NAME=RegionOne
 export OS_IDENTITY_API_VERSION=3
 
@@ -59,26 +59,26 @@ initialize_service "glance" \
                    "image" \
                    "OpenStack Image Service" \
                    ${GLANCE_SERVICE_PASSWORD} \
-                   http://${KEYSTONE_HOSTNAME}:9292 \
-                   http://${KEYSTONE_HOSTNAME}:9292 \
-                   http://${KEYSTONE_HOSTNAME}:9292 \
+                   http://${CONTROL_HOST}:9292 \
+                   http://${CONTROL_HOST}:9292 \
+                   http://${CONTROL_HOST}:9292 \
                    "RegionOne"
 
 initialize_service "nova" \
                    "compute" \
                    "OpenStack Compute Service" \
                    ${NOVA_SERVICE_PASSWORD} \
-                   http://${KEYSTONE_HOSTNAME}:8774/v2.1 \
-                   http://${KEYSTONE_HOSTNAME}:8774/v2.1 \
-                   http://${KEYSTONE_HOSTNAME}:8774/v2.1 \
+                   http://${CONTROL_HOST}:8774/v2.1 \
+                   http://${CONTROL_HOST}:8774/v2.1 \
+                   http://${CONTROL_HOST}:8774/v2.1 \
                    "RegionOne"
 
 initialize_service "placement" \
                    "placement" \
                    "OpenStack Placement Service" \
                    ${NOVA_SERVICE_PASSWORD} \
-                   http://${KEYSTONE_HOSTNAME}:8778 \
-                   http://${KEYSTONE_HOSTNAME}:8778 \
-                   http://${KEYSTONE_HOSTNAME}:8778 \
+                   http://${CONTROL_HOST}:8778 \
+                   http://${CONTROL_HOST}:8778 \
+                   http://${CONTROL_HOST}:8778 \
                    "RegionOne"
 

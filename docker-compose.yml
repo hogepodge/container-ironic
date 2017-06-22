@@ -29,6 +29,7 @@ services:
   glance_api:
     image: glance_api:centos
     env_file: ./config
+    hostname: glance_api
     ports:
       - '9292:9292'
 

@@ -5,4 +5,4 @@ ADD /wait-for-it.sh /wait-for-it.sh
 RUN yum install -y mariadb pip; \
     pip install --upgrade pip; \
     pip install python-openstackclient
-ENTRYPOINT ["/wait-for-it.sh", "mariadb:3306", "-t", "30", "--", "/initialize_glance_database.sh"]
+ENTRYPOINT ["/wait-for-it.sh", "mariadb:3306", "-t", "60", "--", "/initialize_glance_database.sh"]
