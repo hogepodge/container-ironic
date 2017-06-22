@@ -24,7 +24,7 @@
 # override any other image data dropped in by the Ironic Conductor
 docker volume create --name ironic-imagedata-volume
 docker run -v ironic-imagedata-volume:/imagedata \
-           -it \
            --name ironic-imagedata \
+           -it \
            --rm \
            ironic-imagedata

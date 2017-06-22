@@ -10,6 +10,8 @@ docker build ironic/base/. --tag ironic-base:centos
 docker build ironic/database/. --tag ironic-database:centos
 docker build ironic/api/. --tag ironic-api:centos
 docker build ironic/imagedata/. --tag ironic-imagedata
+docker build ironic/tftp/. --tag ironic-tftp:centos
+docker build ironic/nginx/. --tag ironic-nginx
 
 docker build openstack-client/. --tag openstack-client:centos
 docker build service-endpoints/. --tag service-endpoints:centos
