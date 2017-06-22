@@ -1,0 +1,10 @@
+./05-build.sh
+./10-rabbitmq.sh
+./13-mariadb.sh
+./17-keystone-api.sh
+./20-RUNONCE-service-endpoints.sh
+./21-glance-database.sh
+./22-ironic-database.sh
+./30-glance-api.sh
+./35-glance-registry.sh
+./40-ironic-api.sh

@@ -8,6 +8,7 @@ RABBITMQ_DEFAULT_PASS=rabbitpass
 # MariaDB credentials
 MYSQL_ROOT_PASSWORD=mysqlpass
 MYSQL_KEYSTONE_PASSWORD=keystonepass
+MYSQL_GLANCE_PASSWORD=glancepass
 MYSQL_IRONIC_PASSWORD=ironicpass
 MYSQL_NOVA_PASSWORD=novapass
 

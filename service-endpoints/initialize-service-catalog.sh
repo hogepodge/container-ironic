@@ -82,3 +82,12 @@ initialize_service "placement" \
                    http://${CONTROL_HOST}:8778 \
                    "RegionOne"
 
+initialize_service "ironic" \
+                   "baremetal" \
+                   "OpenStack Bare Metal Service" \
+                   ${IRONIC_SERVICE_PASSWORD} \
+                   http://${CONTROL_HOST}:6385 \
+                   http://${CONTROL_HOST}:6385 \
+                   http://${CONTROL_HOST}:6385 \
+                   "RegionOne"
+
