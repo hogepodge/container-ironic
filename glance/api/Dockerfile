@@ -1,5 +1,5 @@
-FROM glance_base:centos
+FROM glance-base:centos
 MAINTAINER chris@openstack.org
 EXPOSE 9292
-ADD /start_glance_api.sh /start_glance_api.sh
-ENTRYPOINT ["/start_glance_api.sh"]
+ADD /start-glance-api.sh /start-glance-api.sh
+ENTRYPOINT ["/start-glance-api.sh"]
