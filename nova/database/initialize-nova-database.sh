@@ -3,12 +3,12 @@
 cat > /tmp/create_database.sql <<-EOF
 CREATE DATABASE IF NOT EXISTS nova CHARACTER SET utf8;
 GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' \
-  IDENTIFIED BY '$MYSQL_NOVA_PASSWORD';
+  IDENTIFIED BY '$MYSQL_PASSWORD';
 GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'%' \
-  IDENTIFIED BY '$MYSQL_NOVA_PASSWORD';
+  IDENTIFIED BY '$MYSQL_PASSWORD';
 EOF
 
-mysql -u root -p$MYSQL_ROOT_PASSWORD -h mariadb < /tmp/create_database.sql
+mysql -u root -p$MYSQL_PASSWORD -h mariadb < /tmp/create_database.sql
 
 #/generate.nova-api.conf
 #/generate.nova-registry.conf

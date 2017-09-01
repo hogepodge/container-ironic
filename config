@@ -3,27 +3,16 @@ CONTROL_HOST=control
 CONTROL_HOST_IP=192.168.1.6
 
 # RabbitMQ credentials
-RABBITMQ_DEFAULT_USER=guest
 RABBITMQ_DEFAULT_PASS=rabbitpass
 
 # MariaDB credentials
-MYSQL_ROOT_PASSWORD=mysqlpass
-MYSQL_KEYSTONE_PASSWORD=keystonepass
-MYSQL_GLANCE_PASSWORD=glancepass
-MYSQL_IRONIC_PASSWORD=ironicpass
-MYSQL_NOVA_PASSWORD=novapass
+MYSQL_PASSWORD=mysqlpass
 
 # Keystone Settings
 KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
 
-# Glance Settings
-GLANCE_SERVICE_PASSWORD=glanceadminpassword
-
-# Ironic Settings
-IRONIC_SERVICE_PASSWORD=ironicadminpassword
-
-# Nova Settings
-NOVA_SERVICE_PASSWORD=novaadminpassword
+# General Service Settings
+SERVICE_PASSWORD=servicepassword
 
 # dnsmasq settings
 IPMI_INTERFACE=eno1

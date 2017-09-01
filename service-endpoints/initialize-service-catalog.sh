@@ -58,7 +58,7 @@ openstack project create service
 initialize_service "glance" \
                    "image" \
                    "OpenStack Image Service" \
-                   ${GLANCE_SERVICE_PASSWORD} \
+                   ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST}:9292 \
                    http://${CONTROL_HOST}:9292 \
                    http://${CONTROL_HOST}:9292 \
@@ -67,7 +67,7 @@ initialize_service "glance" \
 initialize_service "nova" \
                    "compute" \
                    "OpenStack Compute Service" \
-                   ${NOVA_SERVICE_PASSWORD} \
+                   ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST}:8774/v2.1 \
                    http://${CONTROL_HOST}:8774/v2.1 \
                    http://${CONTROL_HOST}:8774/v2.1 \
@@ -76,7 +76,7 @@ initialize_service "nova" \
 initialize_service "placement" \
                    "placement" \
                    "OpenStack Placement Service" \
-                   ${NOVA_SERVICE_PASSWORD} \
+                   ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST}:8778 \
                    http://${CONTROL_HOST}:8778 \
                    http://${CONTROL_HOST}:8778 \
@@ -85,7 +85,7 @@ initialize_service "placement" \
 initialize_service "ironic" \
                    "baremetal" \
                    "OpenStack Bare Metal Service" \
-                   ${IRONIC_SERVICE_PASSWORD} \
+                   ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST}:6385 \
                    http://${CONTROL_HOST}:6385 \
                    http://${CONTROL_HOST}:6385 \
