@@ -15,6 +15,7 @@ docker build ironic/tftp/. --tag ironic-tftp:centos
 docker build ironic/nginx/. --tag ironic-nginx
 
 docker build nova/base/. --tag nova-base:centos
+docker build nova/database/. --tag nova-database:centos
 
 docker build openstack-client/. --tag openstack-client:centos
 docker build service-endpoints/. --tag service-endpoints:centos
