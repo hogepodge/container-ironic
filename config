@@ -1,5 +1,6 @@
 # General settings
 CONTROL_HOST=control
+CONTROL_HOST_IP=192.168.1.6
 
 # RabbitMQ credentials
 RABBITMQ_DEFAULT_USER=guest

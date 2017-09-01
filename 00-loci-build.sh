@@ -26,11 +26,11 @@ function loci_build () {
 }
 
 
-#loci_reqs_build
+loci_reqs_build
 
-#loci_build keystone openstack
-#loci_build glance openstack
-#loci_build nova openstack
-#loci_build neutron openstack
-#loci_build cinder openstack
-loci_build ironic hogepodge
+loci_build keystone openstack
+loci_build glance openstack
+loci_build nova openstack
+loci_build neutron openstack
+loci_build cinder openstack
+loci_build ironic openstack
