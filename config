@@ -6,7 +6,7 @@ CONTROL_HOST_IP=192.168.1.6
 RABBITMQ_DEFAULT_PASS=rabbitpass
 
 # MariaDB credentials
-MYSQL_PASSWORD=mysqlpass
+MYSQL_ROOT_PASSWORD=mysqlpass
 
 # Keystone Settings
 KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword

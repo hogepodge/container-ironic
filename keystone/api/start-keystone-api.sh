@@ -4,12 +4,12 @@
 cat > /tmp/create_database.sql <<-EOF
 CREATE DATABASE IF NOT EXISTS keystone CHARACTER SET utf8;
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' \
-       IDENTIFIED BY '$MYSQL_PASSWORD';
+       IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' \
-       IDENTIFIED BY '$MYSQL_PASSWORD';
+       IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 EOF
 
-mysql -u root -p$MYSQL_PASSWORD -h mariadb < /tmp/create_database.sql
+mysql -u root -p$MYSQL_ROOT_PASSWORD -h mariadb < /tmp/create_database.sql
 
 echo ${CONTROL_HOST}
 
