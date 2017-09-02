@@ -19,7 +19,7 @@ mysql -u root -p$MYSQL_ROOT_PASSWORD -h mariadb < /tmp/create_database.sql
 /generate.nova.conf
 
 nova-manage api_db sync
-# nova-manage cell_v2 map_cell0
-# nova-manage cell_v2 create_cell --name=cell1 --verbose
+nova-manage cell_v2 map_cell0
+nova-manage cell_v2 create_cell --name=cell1 --verbose
 nova-manage db sync
-# nova-manage cell_v2 list_cells
+nova-manage cell_v2 list_cells

@@ -1,4 +1,4 @@
-FROM hogepodge/loci-nova:master-centos
+FROM hogepodge/loci-nova:pike-centos
 MAINTAINER chris@openstack.org
 ADD /etc/nova/ /etc/nova/
 ADD /generate.nova.conf /generate.nova.conf

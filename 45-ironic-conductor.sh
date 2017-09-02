@@ -7,4 +7,4 @@ docker run -d \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
            -p 3260:3260 \
-           ironic-conductor:centos
+           ironic-conductor:pike-centos

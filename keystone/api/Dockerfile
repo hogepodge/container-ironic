@@ -1,4 +1,4 @@
-FROM keystone-base:centos
+FROM keystone-base:pike-centos
 MAINTAINER chris@openstack.org
 EXPOSE 5000 35357
 ADD /wait-for-it.sh /wait-for-it.sh

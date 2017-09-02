@@ -1,4 +1,4 @@
-FROM ironic-base:centos
+FROM ironic-base:pike-centos
 MAINTAINER chris@openstack.org
 ADD /initialize-ironic-database.sh /initialize-ironic-database.sh
 ADD /wait-for-it.sh /wait-for-it.sh

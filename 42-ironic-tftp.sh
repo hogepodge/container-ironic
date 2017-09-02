@@ -5,4 +5,4 @@ docker run -d \
            --name ironic-tftp \
            -p 69:69/udp \
            --rm \
-           ironic-tftp:centos
+           ironic-tftp:pike-centos

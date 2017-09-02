@@ -1,4 +1,4 @@
-FROM hogepodge/loci-glance:master-centos
+FROM hogepodge/loci-glance:pike-centos
 MAINTAINER chris@openstack.org
 ADD /generate.glance-api.conf /generate.glance-api.conf
 ADD /generate.glance-registry.conf /generate.glance-registry.conf

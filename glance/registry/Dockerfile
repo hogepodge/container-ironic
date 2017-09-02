@@ -1,4 +1,4 @@
-FROM glance-base:centos
+FROM glance-base:pike-centos
 MAINTAINER chris@openstack.org
 EXPOSE 9191
 ADD /start-glance-registry.sh /start-glance-registry.sh

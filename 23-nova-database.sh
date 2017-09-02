@@ -3,5 +3,5 @@ docker run --env-file ./config \
            --name initialize-nova-database \
            --link=mariadb:mariadb \
            --rm \
-           nova-database:centos \
+           nova-database:pike-centos \
            -it bash

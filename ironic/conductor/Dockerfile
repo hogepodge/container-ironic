@@ -1,4 +1,4 @@
-FROM ironic-base:centos
+FROM ironic-base:pike-centos
 MAINTAINER chris@openstack.org
 EXPOSE 3260
 RUN yum install -y qemu-img ipmitool gettext ipmitool psmisc graphviz

@@ -14,6 +14,11 @@ docker rm glance-registry
 
 docker stop ironic-api
 docker rm ironic-api
+docker stop ironic-conductor
+docker rm ironic-conductor
+
+docker stop nova-api
+docker rm nova-api
 
 docker rm service-endpoints
 docker volume rm mariadb-volume

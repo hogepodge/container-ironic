@@ -6,4 +6,4 @@ docker run -d \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
            -p=6385:6385 \
-           ironic-api:centos
+           ironic-api:pike-centos
