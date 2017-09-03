@@ -19,6 +19,8 @@ KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
 # network services to the bare metal compute instances.
 PROVIDER_INTERFACE=enp0s20f0u4
 
+METADATA_SECRET=TheMetadataSecret
+
 ### General Service Settings
 SERVICE_PASSWORD=servicepassword
 
