@@ -1,6 +1,8 @@
 docker build keystone/base/. --tag keystone-base:pike-centos
 docker build keystone/api/. --tag keystone-api:pike-centos
 
+docker build neutron/base/. --tag neutron-base:pike-centos
+
 docker build glance/base/. --tag glance-base:pike-centos
 docker build glance/database/. --tag glance-database:pike-centos
 docker build glance/api/. --tag glance-api:pike-centos
@@ -21,7 +23,6 @@ docker build nova/conductor/. --tag nova-conductor:pike-centos
 docker build nova/scheduler/. --tag nova-scheduler:pike-centos
 docker build nova/compute/. --tag nova-compute:pike-centos
 
-docker build neutron/base/. --tag neutron-base:pike-centos
 
 docker build openstack-client/. --tag openstack-client:pike-centos
 docker build service-endpoints/. --tag service-endpoints:pike-centos
