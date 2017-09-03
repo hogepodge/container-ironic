@@ -5,5 +5,5 @@ ADD /wait-for-it.sh /wait-for-it.sh
 ADD /start-keystone-api.sh /start-keystone-api.sh
 ADD /wsgi-keystone.conf /wsgi-keystone.conf
 ADD /keystone-paste.ini /etc/keystone/keystone-paste.ini
-RUN sudo yum install -y mariadb
+RUN sudo yum install -y mariadb which
 ENTRYPOINT ["/wait-for-it.sh", "mariadb:3306", "-t", "30", "--", "/start-keystone-api.sh"]

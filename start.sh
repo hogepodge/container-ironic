@@ -5,6 +5,14 @@
 ./20-RUNONCE-service-endpoints.sh
 ./21-glance-database.sh
 ./22-ironic-database.sh
+./23-nova-database.sh
 ./30-glance-api.sh
 ./35-glance-registry.sh
 ./40-ironic-api.sh
+./41-ironic-imagedata.sh
+./42-ironic-tftp.sh
+./43-ironic-nginx.sh
+./45-ironic-conductor.sh
+./50-nova-api.sh
+./51-nova-conductor.sh
+./52-nova-scheduler.sh

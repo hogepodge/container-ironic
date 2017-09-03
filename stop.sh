@@ -1,25 +1,30 @@
-docker stop rabbitmq 
-docker rm rabbitmq
+docker stop rabbitmq \
+            mariadb \
+            keystone \
+            glance-api\
+            glance-registry \
+            ironic-api \
+            ironic-tftp \
+            ironic-nginx \
+            ironic-conductor \
+            nova-api \
+            nova-scheduler \
+            nova-conductor
+           
 
-docker stop mariadb 
-docker rm mariadb
+docker rm rabbitmq \
+          mariadb \
+          keystone \
+          glance-api \
+          glance-registry \
+          ironic-api \
+          ironic-conductor \
+          ironic-tftp \
+          ironic-nginx \
+          nova-api \
+          nova-scheduler \
+          nova-conductor \
+          service-endpoints
 
-docker stop keystone 
-docker rm keystone
-
-docker stop glance-api 
-docker rm glance-api
-docker stop glance-registry
-docker rm glance-registry
-
-docker stop ironic-api
-docker rm ironic-api
-docker stop ironic-conductor
-docker rm ironic-conductor
-
-docker stop nova-api
-docker rm nova-api
-
-docker rm service-endpoints
 docker volume rm mariadb-volume
 
