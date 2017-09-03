@@ -16,3 +16,4 @@
 ./50-nova-api.sh
 ./51-nova-conductor.sh
 ./52-nova-scheduler.sh
+./53-nova-compute.sh

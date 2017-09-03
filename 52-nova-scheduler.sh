@@ -1,4 +1,4 @@
-# Starts the Nova API service
+# Starts the Nova Scheduler service
 docker run -d \
            --env-file ./config \
            --hostname nova-scheduler \

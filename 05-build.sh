@@ -19,6 +19,7 @@ docker build nova/database/. --tag nova-database:pike-centos
 docker build nova/api/. --tag nova-api:pike-centos
 docker build nova/conductor/. --tag nova-conductor:pike-centos
 docker build nova/scheduler/. --tag nova-scheduler:pike-centos
+docker build nova/compute/. --tag nova-compute:pike-centos
 
 docker build openstack-client/. --tag openstack-client:pike-centos
 docker build service-endpoints/. --tag service-endpoints:pike-centos

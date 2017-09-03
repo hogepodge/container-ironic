@@ -9,7 +9,8 @@ docker stop rabbitmq \
             ironic-conductor \
             nova-api \
             nova-scheduler \
-            nova-conductor
+            nova-conductor \
+            nova-compute
            
 
 docker rm rabbitmq \
@@ -24,6 +25,7 @@ docker rm rabbitmq \
           nova-api \
           nova-scheduler \
           nova-conductor \
+          nova-compute \
           service-endpoints
 
 docker volume rm mariadb-volume
