@@ -2,6 +2,7 @@ docker build keystone/base/. --tag keystone-base:pike-centos
 docker build keystone/api/. --tag keystone-api:pike-centos
 
 docker build neutron/base/. --tag neutron-base:pike-centos
+docker build neutron/database/. --tag neutron-database:pike-centos
 
 docker build glance/base/. --tag glance-base:pike-centos
 docker build glance/database/. --tag glance-database:pike-centos

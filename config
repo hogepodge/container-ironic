@@ -1,20 +1,28 @@
-# General settings
+### General settings
 CONTROL_HOST=control
 CONTROL_HOST_IP=192.168.1.6
 
-# RabbitMQ credentials
+### RabbitMQ credentials
 RABBITMQ_DEFAULT_PASS=rabbitpass
 
-# MariaDB credentials
+### MariaDB credentials
 MYSQL_ROOT_PASSWORD=mysqlpass
 
-# Keystone Settings
+### Keystone Settings
 KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
 
-# General Service Settings
+### Neutron Settings
+
+# This is the 
+
+# This is the network interface that neutron will use to provide
+# network services to the bare metal compute instances.
+PROVIDER_INTERFACE=enp0s20f0u4
+
+### General Service Settings
 SERVICE_PASSWORD=servicepassword
 
-# dnsmasq settings
+### dnsmasq settings
 IPMI_INTERFACE=eno1
 DATA_INTERFACE=enp0s20f0u4
 IPMI_RANGE=192.168.20.10,192.168.20.20,12h
@@ -24,5 +32,5 @@ DNSMASQ_ADDITIONAL="dhcp-host=0c:c4:7a:ca:3a:3e,192.168.20.11 \
 dhcp-host=0c:c4:7a:ca:3a:4b,192.168.20.12 \
 dhcp-host=0c:c4:7a:9a:3c:64,192.168.20.13"
 
-# Ironic Settings
+### Ironic Settings
 IRONIC_DEBUG=false

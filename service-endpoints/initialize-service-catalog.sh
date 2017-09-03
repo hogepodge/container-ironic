@@ -55,6 +55,15 @@ export OS_IDENTITY_API_VERSION=3
 
 openstack project create service
 
+initialize_service "neutron" \
+                   "network" \
+                   "OpenStack Networking Service" \
+                   ${SERVICE_PASSWORD} \
+                   http://${CONTROL_HOST}:9696 \
+                   http://${CONTROL_HOST}:9696 \
+                   http://${CONTROL_HOST}:9696 \
+                   "RegionOne"
+
 initialize_service "glance" \
                    "image" \
                    "OpenStack Image Service" \

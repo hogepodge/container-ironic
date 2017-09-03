@@ -3,6 +3,7 @@
 ./13-mariadb.sh
 ./17-keystone-api.sh
 ./20-RUNONCE-service-endpoints.sh
+./21-neutron-database.sh
 ./22-glance-database.sh
 ./23-ironic-database.sh
 ./24-nova-database.sh
