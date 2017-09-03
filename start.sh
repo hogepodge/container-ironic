@@ -7,6 +7,7 @@
 ./22-glance-database.sh
 ./23-ironic-database.sh
 ./24-nova-database.sh
+./30-neutron-api.sh
 ./40-glance-api.sh
 ./45-glance-registry.sh
 ./50-ironic-api.sh

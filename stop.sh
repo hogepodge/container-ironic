@@ -1,6 +1,7 @@
 docker stop rabbitmq \
             mariadb \
             keystone \
+            neutron-api \
             glance-api\
             glance-registry \
             ironic-api \
@@ -16,6 +17,7 @@ docker stop rabbitmq \
 docker rm rabbitmq \
           mariadb \
           keystone \
+          neutron-api \
           glance-api \
           glance-registry \
           ironic-api \
