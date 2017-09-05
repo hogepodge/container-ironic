@@ -1,4 +1,4 @@
-./05-build.sh
+#./05-build.sh
 ./10-rabbitmq.sh
 ./13-mariadb.sh
 ./17-keystone-api.sh

@@ -9,7 +9,7 @@ GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' \
        IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 EOF
 
-mysql -u root -p$MYSQL_ROOT_PASSWORD -h mariadb < /tmp/create_database.sql
+mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST} < /tmp/create_database.sql
 
 echo ${CONTROL_HOST}
 

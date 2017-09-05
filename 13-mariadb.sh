@@ -9,4 +9,5 @@ docker run -d \
            --hostname mariadb \
            --name mariadb \
            --restart unless-stopped \
+           -p=3306:3306 \
            mariadb:10.1.22
