@@ -5,5 +5,5 @@ RUN yum update -y; \
     yum install -y python-pip; \
     yum clean all; \
     pip install --upgrade pip; \
-    pip install python-openstackclient python-ironicclient
+    pip install python-openstackclient python-ironicclient python-neutronclient
 ADD /adminrc /adminrc

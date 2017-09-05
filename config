@@ -13,13 +13,17 @@ KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
 
 ### Neutron Settings
 
-# This is the 
-
 # This is the network interface that neutron will use to provide
 # network services to the bare metal compute instances.
 PROVIDER_INTERFACE=enp0s20f0u4
 
 METADATA_SECRET=TheMetadataSecret
+
+PROVIDER_SUBNET=192.168.20.0/24
+PROVIDER_GATEWAY=192.168.20.1
+PROVIDER_POOL_START=192.168.20.100
+PROVIDER_POOL_END=192.168.20.200
+PROVIDER_DNS_NAMESERVER=8.8.4.4
 
 ### General Service Settings
 SERVICE_PASSWORD=servicepassword

@@ -11,6 +11,7 @@
 ./31-neutron-linuxbridge-agent.sh
 ./32-neutron-dhcp-agent.sh
 ./33-neutron-metadata-agent.sh
+./34-RUNONCE-neutron-provider.sh
 ./40-glance-api.sh
 ./45-glance-registry.sh
 ./50-ironic-api.sh

@@ -5,6 +5,7 @@ docker stop rabbitmq \
             neutron-linuxbridge-agent \
             neutron-dhcp-agent \
             neutron-metadata-agent \
+            neutron-provider \
             glance-api\
             glance-registry \
             ironic-api \
@@ -24,6 +25,7 @@ docker rm rabbitmq \
           neutron-linuxbridge-agent \
           neutron-dhcp-agent \
           neutron-metadata-agent \
+          neutron-provider \
           glance-api \
           glance-registry \
           ironic-api \
