@@ -1,8 +1,10 @@
 docker stop rabbitmq \
             mariadb \
             keystone \
-            neutron-api \
+            neutron-server \
             neutron-linuxbridge-agent \
+            neutron-dhcp-agent \
+            neutron-metadata-agent \
             glance-api\
             glance-registry \
             ironic-api \
@@ -18,9 +20,10 @@ docker stop rabbitmq \
 docker rm rabbitmq \
           mariadb \
           keystone \
-          neutron-api \
+          neutron-server \
           neutron-linuxbridge-agent \
           neutron-dhcp-agent \
+          neutron-metadata-agent \
           glance-api \
           glance-registry \
           ironic-api \
