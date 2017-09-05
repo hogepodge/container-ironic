@@ -20,6 +20,7 @@ docker rm rabbitmq \
           keystone \
           neutron-api \
           neutron-linuxbridge-agent \
+          neutron-dhcp-agent \
           glance-api \
           glance-registry \
           ironic-api \

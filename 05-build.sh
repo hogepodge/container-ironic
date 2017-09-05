@@ -5,6 +5,7 @@ docker build neutron/base/. --tag neutron-base:pike-centos
 docker build neutron/database/. --tag neutron-database:pike-centos
 docker build neutron/api/. --tag neutron-api:pike-centos
 docker build neutron/linuxbridge-agent/. --tag neutron-linuxbridge-agent:pike-centos
+docker build neutron/dhcp-agent/. --tag neutron-dhcp-agent:pike-centos
 
 docker build glance/base/. --tag glance-base:pike-centos
 docker build glance/database/. --tag glance-database:pike-centos
