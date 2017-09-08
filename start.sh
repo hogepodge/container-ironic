@@ -19,6 +19,7 @@
 ./52-ironic-tftp.sh
 ./53-ironic-nginx.sh
 ./55-ironic-conductor.sh
+./57-ironic-agent.sh
 ./60-nova-api.sh
 ./61-nova-conductor.sh
 ./62-nova-scheduler.sh

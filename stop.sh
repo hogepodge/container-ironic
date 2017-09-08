@@ -32,6 +32,7 @@ docker rm rabbitmq \
           ironic-conductor \
           ironic-tftp \
           ironic-nginx \
+          ironic-agent \
           nova-api \
           nova-scheduler \
           nova-conductor \

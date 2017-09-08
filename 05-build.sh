@@ -1,3 +1,5 @@
+docker build dnsmasq/. --tag dnsmasq:ipmi
+
 docker build keystone/base/. --tag keystone-base:pike-centos
 docker build keystone/api/. --tag keystone-api:pike-centos
 
@@ -21,6 +23,7 @@ docker build ironic/conductor/. --tag ironic-conductor:pike-centos
 docker build ironic/imagedata/. --tag ironic-imagedata
 docker build ironic/tftp/. --tag ironic-tftp:pike-centos
 docker build ironic/nginx/. --tag ironic-nginx
+docker build ironic/agent/. --tag ironic-agent:pike-centos
 
 docker build nova/base/. --tag nova-base:pike-centos
 docker build nova/database/. --tag nova-database:pike-centos
