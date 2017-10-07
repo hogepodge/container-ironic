@@ -1,4 +1,4 @@
-FROM hogepodge/loci-nova:centos
+FROM hogepodge/nova:centos
 MAINTAINER chris@openstack.org
 ADD /etc/nova/ /etc/nova/
 ADD /generate.nova.conf /generate.nova.conf
