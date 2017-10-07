@@ -1,4 +1,4 @@
-FROM nova-base:pike-centos
+FROM nova-base:centos
 MAINTAINER chris@openstack.org
 RUN set -x \
     && yum upgrade -y \

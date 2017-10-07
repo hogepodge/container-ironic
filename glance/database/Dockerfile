@@ -1,4 +1,4 @@
-FROM glance-base:pike-centos
+FROM glance-base:centos
 MAINTAINER chris@openstack.org
 ADD /initialize-glance-database.sh /initialize-glance-database.sh
 ADD /wait-for-it.sh /wait-for-it.sh

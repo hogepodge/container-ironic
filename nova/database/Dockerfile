@@ -1,4 +1,4 @@
-FROM nova-base:pike-centos
+FROM nova-base:centos
 MAINTAINER chris@openstack.org
 ADD /initialize-nova-database.sh /initialize-nova-database.sh
 ADD /wait-for-it.sh /wait-for-it.sh
