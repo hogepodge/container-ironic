@@ -2,33 +2,29 @@
 set -x
 cd /tmp
 
-STABLE=stable/
-OPENSTACK_RELEASE=pike
-IMAGE_DISTRO=centos
-REPOSITORY=hogepodge
-
-function loci_reqs_build () {
-  git clone https://github.com/openstack/loci-requirements ./loci-requirements
-  docker build --build-arg PROJECT_REF=${STABLE}${OPENSTACK_RELEASE} \
-               --tag ${REPOSITORY}/loci-requirements:${OPENSTACK_RELEASE}-${IMAGE_DISTRO} ./loci-requirements/${IMAGE_DISTRO}/
-  docker push ${REPOSITORY}/loci-requirements:${OPENSTACK_RELEASE}-${IMAGE_DISTRO} ${NOCACHE}
+function base_build () {
+   rm -rf /tmp/loci
+   git clone https://github.com/openstack/loci.git /tmp/loci
+   docker build /tmp/loci/dockerfiles/centos \
+                --tag hogepodge/openstackbase:centos
+   docker push hogepodge/openstackbase:centos
 }
 
 function loci_build () {
     PROJECT="$1"
-    LOCIREPO="$2"
-    git clone https://github.com/${LOCIREPO}/loci-${PROJECT} ./loci-${PROJECT}
-    docker build --build-arg PROJECT_REF=${STABLE}${OPENSTACK_RELEASE} \
-                 --build-arg WHEELS=${REPOSITORY}/loci-requirements:${OPENSTACK_RELEASE}-${IMAGE_DISTRO} \
-                 --tag ${REPOSITORY}/loci-${PROJECT}:${OPENSTACK_RELEASE}-${IMAGE_DISTRO} ./loci-${PROJECT}/${IMAGE_DISTRO}/ ${NOCACHE}
-    docker tag ${REPOSITORY}/loci-${PROJECT}:${OPENSTACK_RELEASE}-${IMAGE_DISTRO} ${REPOSITORY}/loci-${PROJECT}:${OPENSTACK_RELEASE}-${IMAGE_DISTRO}
-    docker push ${REPOSITORY}/loci-${PROJECT}:${OPENSTACK_RELEASE}-${IMAGE_DISTRO}
+    docker build /tmp/loci \
+                 --tag hogepodge/${PROJECT}:centos \
+                 --build-arg FROM=hogepodge/openstackbase:centos \
+                 --build-arg DISTRO=centos \
+                 --build-arg PROJECT=${PROJECT} \
+                 --build-arg WHEELS=hogepodge/requirements:centos --no-cache
+    docker push hogepodge/${PROJECT}:centos
+    # https://github.com/openstack/loci.git \
 }
 
-
-loci_reqs_build
-
-loci_build keystone openstack
+#base_build
+#loci_build requirements
+#loci_build keystone
 loci_build glance openstack
 loci_build nova openstack
 loci_build neutron openstack

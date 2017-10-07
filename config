@@ -1,6 +1,6 @@
 ### General settings
 CONTROL_HOST=control
-CONTROL_HOST_IP=192.168.1.6
+CONTROL_HOST_IP=192.168.1.44
 
 ### RabbitMQ credentials
 RABBITMQ_DEFAULT_PASS=rabbitpass

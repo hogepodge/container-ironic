@@ -9,5 +9,5 @@ docker run -d \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
            -p=5000:5000 -p=35357:35357  \
-           keystone-api:pike-centos
+           keystone-api:centos
            
