@@ -1,5 +1,8 @@
 docker build dnsmasq/. --tag dnsmasq:ipmi
 
+docker build openstack-client/. --tag openstack-client:centos
+docker build service-endpoints/. --tag service-endpoints:centos
+
 docker build keystone/api/. --tag keystone-api:centos
 
 #docker build neutron/base/. --tag neutron-base:centos
@@ -31,5 +34,3 @@ docker build keystone/api/. --tag keystone-api:centos
 #docker build nova/scheduler/. --tag nova-scheduler:centos
 #docker build nova/compute/. --tag nova-compute:centos
 
-#docker build openstack-client/. --tag openstack-client:centos
-#docker build service-endpoints/. --tag service-endpoints:centos

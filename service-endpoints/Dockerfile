@@ -1,4 +1,4 @@
-FROM openstack-client:pike-centos
+FROM openstack-client:centos
 ADD /wait-for-it.sh /wait-for-it.sh
 ADD /initialize-service-catalog.sh /initialize-service-catalog.sh
 RUN yum install -y which

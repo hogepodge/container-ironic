@@ -3,4 +3,4 @@
 docker run --env-file ./config \
            --name service-endpoints \
            --link keystone:keystone \
-            service-endpoints:pike-centos
+            service-endpoints:centos
