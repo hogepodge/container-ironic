@@ -6,4 +6,4 @@ docker run -d \
            --cap-add=NET_ADMIN \
            --net=host \
            --privileged \
-           neutron-linuxbridge-agent:pike-centos 
+           neutron-linuxbridge-agent:centos 

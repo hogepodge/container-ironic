@@ -5,13 +5,13 @@ docker build service-endpoints/. --tag service-endpoints:centos
 
 docker build keystone/api/. --tag keystone-api:centos
 
-#docker build neutron/base/. --tag neutron-base:centos
-#docker build neutron/database/. --tag neutron-database:centos
-#docker build neutron/server/. --tag neutron-server:centos
-#docker build neutron/linuxbridge-agent/. --tag neutron-linuxbridge-agent:centos
-#docker build neutron/dhcp-agent/. --tag neutron-dhcp-agent:centos
-#docker build neutron/metadata-agent/. --tag neutron-metadata-agent:centos
-#docker build neutron/provider/. --tag neutron-provider:centos
+docker build neutron/base/. --tag neutron-base:centos
+docker build neutron/database/. --tag neutron-database:centos
+docker build neutron/server/. --tag neutron-server:centos
+docker build neutron/linuxbridge-agent/. --tag neutron-linuxbridge-agent:centos
+docker build neutron/dhcp-agent/. --tag neutron-dhcp-agent:centos
+docker build neutron/metadata-agent/. --tag neutron-metadata-agent:centos
+docker build neutron/provider/. --tag neutron-provider:centos
 
 #docker build glance/base/. --tag glance-base:centos
 #docker build glance/database/. --tag glance-database:centos

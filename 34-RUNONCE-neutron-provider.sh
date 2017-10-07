@@ -3,4 +3,4 @@
 docker run --env-file ./config \
            --name neutron-provider \
            --link keystone:keystone \
-            neutron-provider:pike-centos
+            neutron-provider:centos

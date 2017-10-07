@@ -5,4 +5,4 @@ docker run -d \
            --name nova-scheduler \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
-           nova-scheduler:pike-centos
+           nova-scheduler:centos

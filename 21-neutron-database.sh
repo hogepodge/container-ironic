@@ -3,4 +3,4 @@ docker run --env-file ./config \
            --name initialize-neutron-database \
            --link=mariadb:mariadb \
            --rm \
-           neutron-database:pike-centos
+           neutron-database:centos

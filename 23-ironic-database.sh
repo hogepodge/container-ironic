@@ -3,4 +3,4 @@ docker run --env-file ./config \
            --name initialize-ironic-database \
            --link=mariadb:mariadb \
            --rm \
-           ironic-database:pike-centos
+           ironic-database:centos

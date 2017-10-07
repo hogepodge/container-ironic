@@ -6,4 +6,4 @@ docker run -d \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
            -p=9191:9191 \
-           glance-registry:pike-centos
+           glance-registry:centos

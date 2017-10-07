@@ -17,16 +17,20 @@ function loci_build () {
                  --build-arg FROM=hogepodge/openstackbase:centos \
                  --build-arg DISTRO=centos \
                  --build-arg PROJECT=${PROJECT} \
+                 --build-arg PROJECT_REF=stable/pike \
                  --build-arg WHEELS=hogepodge/requirements:centos --no-cache
+     
     docker push hogepodge/${PROJECT}:centos
     # https://github.com/openstack/loci.git \
 }
 
-#base_build
-#loci_build requirements
-#loci_build keystone
-loci_build glance openstack
-loci_build nova openstack
-loci_build neutron openstack
-loci_build cinder openstack
-loci_build ironic openstack
+base_build
+loci_build requirements
+loci_build keystone
+loci_build neutron
+loci_build glance
+loci_build nova
+loci_build cinder
+loci_build ironic 
+loci_build swift
+

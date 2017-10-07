@@ -5,4 +5,4 @@ docker run -d \
            --name neutron-metadata-agent \
            --cap-add=NET_ADMIN \
            --net=host \
-           neutron-metadata-agent:pike-centos 
+           neutron-metadata-agent:centos 

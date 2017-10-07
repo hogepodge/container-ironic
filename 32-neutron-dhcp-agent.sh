@@ -5,4 +5,4 @@ docker run -d \
            --name neutron-dhcp-agent \
            --cap-add=NET_ADMIN \
            --net=host \
-           neutron-dhcp-agent:pike-centos 
+           neutron-dhcp-agent:centos 

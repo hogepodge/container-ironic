@@ -5,4 +5,4 @@ docker run -d \
            --name nova-compute \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
-           nova-compute:pike-centos
+           nova-compute:centos

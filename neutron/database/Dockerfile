@@ -1,4 +1,4 @@
-FROM neutron-base:pike-centos
+FROM neutron-base:centos
 MAINTAINER chris@openstack.org
 ADD /initialize-neutron-database.sh /initialize-neutron-database.sh
 ADD /wait-for-it.sh /wait-for-it.sh

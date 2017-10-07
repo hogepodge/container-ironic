@@ -5,4 +5,4 @@ docker run -d \
            --name nova-conductor \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
-           nova-conductor:pike-centos
+           nova-conductor:centos

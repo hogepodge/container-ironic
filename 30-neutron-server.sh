@@ -6,4 +6,4 @@ docker run -d \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
            -p=9696:9696 \
-           neutron-server:pike-centos
+           neutron-server:centos
