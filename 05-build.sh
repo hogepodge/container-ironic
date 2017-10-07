@@ -13,19 +13,19 @@ docker build neutron/dhcp-agent/. --tag neutron-dhcp-agent:centos
 docker build neutron/metadata-agent/. --tag neutron-metadata-agent:centos
 docker build neutron/provider/. --tag neutron-provider:centos
 
-#docker build glance/base/. --tag glance-base:centos
-#docker build glance/database/. --tag glance-database:centos
-#docker build glance/api/. --tag glance-api:centos
-#docker build glance/registry/. --tag glance-registry:centos
+docker build glance/base/. --tag glance-base:centos
+docker build glance/database/. --tag glance-database:centos
+docker build glance/api/. --tag glance-api:centos
+docker build glance/registry/. --tag glance-registry:centos
 
-#docker build ironic/base/. --tag ironic-base:centos
-#docker build ironic/database/. --tag ironic-database:centos
-#docker build ironic/api/. --tag ironic-api:centos
-#docker build ironic/conductor/. --tag ironic-conductor:centos
-#docker build ironic/imagedata/. --tag ironic-imagedata
-#docker build ironic/tftp/. --tag ironic-tftp:centos
-#docker build ironic/nginx/. --tag ironic-nginx
-#docker build ironic/agent/. --tag ironic-agent:centos
+docker build ironic/base/. --tag ironic-base:centos
+docker build ironic/database/. --tag ironic-database:centos
+docker build ironic/api/. --tag ironic-api:centos
+docker build ironic/conductor/. --tag ironic-conductor:centos
+docker build ironic/imagedata/. --tag ironic-imagedata
+docker build ironic/tftp/. --tag ironic-tftp:centos
+docker build ironic/nginx/. --tag ironic-nginx
+docker build ironic/agent/. --tag ironic-agent:centos
 
 #docker build nova/base/. --tag nova-base:centos
 #docker build nova/database/. --tag nova-database:centos
