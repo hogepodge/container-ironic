@@ -1,11 +1,13 @@
 docker stop rabbitmq \
             mariadb \
+            dnsmasq-ipmi \
             keystone \
             neutron-server \
             neutron-linuxbridge-agent \
             neutron-dhcp-agent \
             neutron-metadata-agent \
             neutron-provider \
+            swift \
             glance-api\
             glance-registry \
             ironic-api \
@@ -20,12 +22,14 @@ docker stop rabbitmq \
 
 docker rm rabbitmq \
           mariadb \
+          dnsmasq-ipmi \
           keystone \
           neutron-server \
           neutron-linuxbridge-agent \
           neutron-dhcp-agent \
           neutron-metadata-agent \
           neutron-provider \
+          swift \
           glance-api \
           glance-registry \
           ironic-api \
@@ -40,4 +44,5 @@ docker rm rabbitmq \
           service-endpoints
 
 docker volume rm mariadb-volume
-
+docker volume rm swiftconfig
+docker volume rm swiftdata

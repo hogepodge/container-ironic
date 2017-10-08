@@ -16,6 +16,8 @@ METADATA_SECRET=TheMetadataSecret
 
 ### Swift Settings
 SWIFT_ADMIN_KEY=TheSwiftAdminKey
+SWIFT_HASH_PATH_PREFIX=TheSwiftPrefix
+SWIFT_HASH_PATH_SUFFIX=TheSwiftSuffix
 
 # This is the network interface that neutron will use to provide
 # network services to the bare metal compute instances.

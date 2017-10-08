@@ -68,9 +68,9 @@ initialize_service "swift" \
                    "object-store" \
                    "OpenStack Object Storage" \
                    ${SERVICE_PASSWORD} \
-                   http://${CONTROL_HOST}:8080/v1/AUTH_%\(tenant_id\)s \
-                   http://${CONTROL_HOST}:8080/v1/AUTH_%\(tenant_id\)s \
-                   http://${CONTROL_HOST}:8080 \
+                   http://${CONTROL_HOST}:8888/v1/AUTH_%\(tenant_id\)s \
+                   http://${CONTROL_HOST}:8888/v1/AUTH_%\(tenant_id\)s \
+                   http://${CONTROL_HOST}:8888 \
                    "RegionOne"
 
 

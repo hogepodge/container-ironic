@@ -2,6 +2,7 @@
 
 set -x
 chown -R swift:swift /srv/node
+/generate.swift.conf
 /generate.swift-account-server.conf
 /generate.swift-container-server.conf
 /generate.swift-object-server.conf
@@ -10,3 +11,4 @@ chown -R swift:swift /srv/node
 /generate.account-ring
 /generate.container-ring
 /generate.object-ring
+chown -R swift:root /etc/swift
