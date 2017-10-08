@@ -53,7 +53,7 @@ export OS_AUTH_URL=http://${CONTROL_HOST}:5000
 export OS_REGION_NAME=RegionOne
 export OS_IDENTITY_API_VERSION=3
 
-openstack project create service
+openstack project create service --description "General service project"
 
 initialize_service "neutron" \
                    "network" \
@@ -63,6 +63,16 @@ initialize_service "neutron" \
                    http://${CONTROL_HOST}:9696 \
                    http://${CONTROL_HOST}:9696 \
                    "RegionOne"
+
+initialize_service "swift" \
+                   "object-store" \
+                   "OpenStack Object Storage" \
+                   ${SERVICE_PASSWORD} \
+                   http://${CONTROL_HOST}:8080/v1/AUTH_%\(tenant_id\)s \
+                   http://${CONTROL_HOST}:8080/v1/AUTH_%\(tenant_id\)s \
+                   http://${CONTROL_HOST}:8080 \
+                   "RegionOne"
+
 
 initialize_service "glance" \
                    "image" \

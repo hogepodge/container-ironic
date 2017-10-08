@@ -1,0 +1,14 @@
+#!/bin/bash
+LOCAL_IP=`hostname -I`
+cd /etc/swift
+mkdir /srv/node/store
+swift-ring-builder account.builder create 10 1 1
+swift-ring-builder account.builder add \
+                   --region 1 \
+                   --zone 1 \
+                   --ip $LOCAL_IP \
+                   --port 6202 \
+                   --device store \
+                   --weight 100
+swift-ring-builder account.builder rebalance
+

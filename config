@@ -14,6 +14,9 @@ KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
 ### Neutron Settings
 METADATA_SECRET=TheMetadataSecret
 
+### Swift Settings
+SWIFT_ADMIN_KEY=TheSwiftAdminKey
+
 # This is the network interface that neutron will use to provide
 # network services to the bare metal compute instances.
 PROVIDER_INTERFACE=enp0s20f0u3
