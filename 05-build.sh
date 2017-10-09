@@ -14,7 +14,6 @@ docker build neutron/metadata-agent/. --tag neutron-metadata-agent:centos
 docker build neutron/provider/. --tag neutron-provider:centos
 
 docker build swift/base/. --tag swift-base:centos
-docker build swift/config/. --tag swift-config:centos
 
 docker build glance/base/. --tag glance-base:centos
 docker build glance/database/. --tag glance-database:centos
