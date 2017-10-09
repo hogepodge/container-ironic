@@ -1,13 +1,13 @@
 # Starts the Swift service
 docker run  \
-           -v swiftconfig:/etc/swift \
-           -v swiftdata:/srv/node \
+           -v /dev/loop0:/dev/loop0 \
            --net swiftnet \
            --ip 172.16.16.16 \
            --env-file ./config \
            --hostname swift \
            --name swift \
-           -p=8888:8888 \
+           --privileged \
+           -p=8888:8080 \
            --rm \
            -it \
            swift-base:centos \

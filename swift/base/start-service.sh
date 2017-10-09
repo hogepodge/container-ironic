@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x
+mount /dev/loop0 /srv
 if [ -e /srv/account.builder ]; then
   echo "Ring files already exist in /srv, copying them to /etc/swift..."
   cp /srv/*.builder /etc/swift/
@@ -18,15 +19,15 @@ if [ ! -e /etc/swift/account.builder ]; then
   echo "No existing ring files, creating them..."
 
   swift-ring-builder object.builder create 7 1 1
-  swift-ring-builder object.builder add 172.16.16.16:6010/sdb1 1
+  swift-ring-builder object.builder add r1z1-172.16.16.16:6010/loop0 1
   swift-ring-builder object.builder rebalance
 
   swift-ring-builder container.builder create 7 1 1
-  swift-ring-builder container.builder add 172.16.16.16:6011/sdb1 1
+  swift-ring-builder container.builder add r1z1-172.16.16.16:6011/loop0 1
   swift-ring-builder container.builder rebalance
 
   swift-ring-builder account.builder create 7 1 1
-  swift-ring-builder account.builder add r1z1-127.0.0.1:6012/sdb1 1
+  swift-ring-builder account.builder add r1z1-127.0.0.1:6012/loop0 1
   swift-ring-builder account.builder rebalance
 
   echo "Copying ring files to /srv to save them if it's a docker volume..."
@@ -44,11 +45,30 @@ if [ ! -z "${SWIFT_USER_PASSWORD}" ]; then
     grep "user_test" /etc/swift/proxy-server.conf
 fi
 
-echo "Starting supervisord..."
-/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+memcached -u swift &
 
-sleep 3
+swift-proxy-server /etc/swift/proxy-server.conf -v &
 
-echo "Starting to tail /var/log/syslog...(hit ctrl-c if you are starting the container in a bash shell)"
+swift-container-server /etc/swift/container-server.conf -v &
+swift-container-auditor /etc/swift/container-server.conf -v &
+swift-container-sync /etc/swift/container-server.conf -v &
 
-tail -n 0 -f /var/log/syslog
+swift-account-server /etc/swift/account-server.conf -v &
+swift-account-auditor /etc/swift/account-server.conf -v &
+swift-account-replicator /etc/swift/account-server.conf -v &
+swift-account-reaper /etc/swift/account-server.conf -v &
+
+swift-object-server /etc/swift/object-server.conf -v &
+swift-object-auditor /etc/swift/object-server.conf -v &
+swift-object-replicator /etc/swift/object-server.conf -v &
+swift-object-updater /etc/swift/object-server.conf -v &
+
+
+#echo "Starting supervisord..."
+#/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
+#
+#sleep 3
+#
+#echo "Starting to tail /var/log/syslog...(hit ctrl-c if you are starting the container in a bash shell)"
+#
+#tail -n 0 -f /var/log/syslog

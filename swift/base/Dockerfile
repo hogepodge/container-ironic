@@ -1,11 +1,14 @@
 FROM hogepodge/swift:centos
 MAINTAINER chris@openstack.org
+# Swift implementation taken from https://github.com/ccollicutt/docker-swift-onlyone
 ADD /swift.conf /etc/swift/swift.conf
 ADD /proxy-server.conf /etc/swift/proxy-server.conf
 ADD /account-server.conf /etc/swift/account-server.conf
 ADD /container-server.conf /erc/swift/container-server.conf
 ADD /object-server.conf /etc/swift/object-server.conf
+ADD /object-expirer.conf /etc/swict/object-expirer.conf
 ADD /rsyncd.conf /etc/rsyncd.conf
+ADD /supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD /start-service.sh /start-service.sh
 RUN set -x \
     && mkdir -p /var/cache/swift \

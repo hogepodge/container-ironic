@@ -1,9 +1,6 @@
-docker run --env-file ./config \
-           -v swiftconfig:/etc/swift \
-           -v swiftdata:/srv/node \
-           --net swiftnet \
-           --ip 172.16.16.16 \
-           --rm \
-           -it \
-           swift-base:centos \
-           /configure-swift.sh
+#!/bin/bash
+set -x
+truncate -s 50G swift-storage
+mkfs.xfs swift-storage
+sudo LOOPDEVICE=`losetup --show -f swift-storage`
+
