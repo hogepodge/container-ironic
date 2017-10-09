@@ -27,7 +27,7 @@ if [ ! -e /etc/swift/account.builder ]; then
   swift-ring-builder container.builder rebalance
 
   swift-ring-builder account.builder create 7 1 1
-  swift-ring-builder account.builder add r1z1-127.0.0.1:6012/loop0 1
+  swift-ring-builder account.builder add r1z1-172.16.16.16:6012/loop0 1
   swift-ring-builder account.builder rebalance
 
   echo "Copying ring files to /srv to save them if it's a docker volume..."

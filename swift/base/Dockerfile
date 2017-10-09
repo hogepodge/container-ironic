@@ -4,7 +4,7 @@ MAINTAINER chris@openstack.org
 ADD /swift.conf /etc/swift/swift.conf
 ADD /proxy-server.conf /etc/swift/proxy-server.conf
 ADD /account-server.conf /etc/swift/account-server.conf
-ADD /container-server.conf /erc/swift/container-server.conf
+ADD /container-server.conf /etc/swift/container-server.conf
 ADD /object-server.conf /etc/swift/object-server.conf
 ADD /object-expirer.conf /etc/swict/object-expirer.conf
 ADD /rsyncd.conf /etc/rsyncd.conf
@@ -19,4 +19,5 @@ RUN set -x \
                    rsync \
                    liberasurecode \
                    memcached \
-                   supervisor
+                   supervisor \
+                   vim

@@ -15,6 +15,7 @@ KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
 METADATA_SECRET=TheMetadataSecret
 
 ### Swift Settings
+SWIFT_USER_PASSWORD=testing
 SWIFT_ADMIN_KEY=TheSwiftAdminKey
 SWIFT_HASH_PATH_PREFIX=TheSwiftPrefix
 SWIFT_HASH_PATH_SUFFIX=TheSwiftSuffix
