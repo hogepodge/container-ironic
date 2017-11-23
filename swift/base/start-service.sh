@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-mount /dev/loop0 /srv
+mount /dev/loop1 /srv
 if [ -e /srv/account.builder ]; then
   echo "Ring files already exist in /srv, copying them to /etc/swift..."
   cp /srv/*.builder /etc/swift/
@@ -9,6 +9,7 @@ fi
 
 if [ ! -e /srv/node ]; then
   mkdir /srv/node
+  mkdir /srv/node/loop1
 fi
 
 chown -R swift:swift /srv
@@ -19,15 +20,15 @@ if [ ! -e /etc/swift/account.builder ]; then
   echo "No existing ring files, creating them..."
 
   swift-ring-builder object.builder create 7 1 1
-  swift-ring-builder object.builder add r1z1-172.16.16.16:6010/loop0 1
+  swift-ring-builder object.builder add r1z1-172.16.16.16:6010/loop1 1
   swift-ring-builder object.builder rebalance
 
   swift-ring-builder container.builder create 7 1 1
-  swift-ring-builder container.builder add r1z1-172.16.16.16:6011/loop0 1
+  swift-ring-builder container.builder add r1z1-172.16.16.16:6011/loop1 1
   swift-ring-builder container.builder rebalance
 
   swift-ring-builder account.builder create 7 1 1
-  swift-ring-builder account.builder add r1z1-172.16.16.16:6012/loop0 1
+  swift-ring-builder account.builder add r1z1-172.16.16.16:6012/loop1 1
   swift-ring-builder account.builder rebalance
 
   echo "Copying ring files to /srv to save them if it's a docker volume..."
@@ -37,7 +38,6 @@ fi
 
 if [ ! -z "${SWIFT_USER_PASSWORD}" ]; then
     echo "Setting passwords in /etc/swift/proxy-server.conf"
-    PASS=`pwgen 12 1`
     sed -i -e "s/user_admin_admin = admin .admin .reseller_admin/user_admin_admin = ${SWIFT_USER_PASSWORD} .admin .reseller_admin/g" /etc/swift/proxy-server.conf
     sed -i -e "s/user_test_tester = testing .admin/user_test_tester = ${SWIFT_USER_PASSWORD} .admin/g" /etc/swift/proxy-server.conf
     sed -i -e "s/user_test2_tester2 = testing2 .admin/user_test2_tester2 = ${SWIFT_USER_PASSWORD} .admin/g" /etc/swift/proxy-server.conf

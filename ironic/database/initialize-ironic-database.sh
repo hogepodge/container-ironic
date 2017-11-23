@@ -8,7 +8,7 @@ GRANT ALL PRIVILEGES ON ironic.* TO 'ironic'@'%' \
   IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 EOF
 
-mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST} < /tmp/create_database.sql
+mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST_IP} < /tmp/create_database.sql
 
 /generate.ironic.conf
 

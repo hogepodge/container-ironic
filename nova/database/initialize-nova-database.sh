@@ -20,12 +20,12 @@ GRANT ALL PRIVILEGES ON nova_cell0.* TO 'nova'@'%' \
   IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 EOF
 
-mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST} < /tmp/create_database.sql
+mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST_IP} < /tmp/create_database.sql
 
 /generate.nova.conf
 
 nova-manage api_db sync
-nova-manage cell_v2 map_cell0 --database_connection "mysql+pymysql://nova:$MYSQL_ROOT_PASSWORD@${CONTROL_HOST}/nova_cell0?charset=utf8"
+nova-manage cell_v2 map_cell0 --database_connection "mysql+pymysql://nova:$MYSQL_ROOT_PASSWORD@${CONTROL_HOST_IP}/nova_cell0?charset=utf8"
 nova-manage cell_v2 create_cell --name=cell1 --verbose
 nova-manage db sync
 nova-manage cell_v2 list_cells

@@ -7,11 +7,14 @@
 ./22-glance-database.sh
 ./23-ironic-database.sh
 ./24-nova-database.sh
+./25-swift-network.sh
+./26-swift-ring.sh
 ./30-neutron-server.sh
 ./31-neutron-linuxbridge-agent.sh
 ./32-neutron-dhcp-agent.sh
 ./33-neutron-metadata-agent.sh
 ./34-RUNONCE-neutron-provider.sh
+./40-swift-aio.sh
 ./50-glance-api.sh
 ./55-glance-registry.sh
 ./60-ironic-api.sh

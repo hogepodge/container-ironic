@@ -49,7 +49,7 @@ function initialize_service() {
 export OS_USERNAME=admin
 export OS_PASSWORD=${KEYSTONE_ADMIN_PASSWORD}
 export OS_TENANT_NAME=admin
-export OS_AUTH_URL=http://${CONTROL_HOST}:5000
+export OS_AUTH_URL=http://${CONTROL_HOST_IP}:5000/v3
 export OS_REGION_NAME=RegionOne
 export OS_IDENTITY_API_VERSION=3
 
@@ -59,18 +59,18 @@ initialize_service "neutron" \
                    "network" \
                    "OpenStack Networking Service" \
                    ${SERVICE_PASSWORD} \
-                   http://${CONTROL_HOST}:9696 \
-                   http://${CONTROL_HOST}:9696 \
-                   http://${CONTROL_HOST}:9696 \
+                   http://${CONTROL_HOST_IP}:9696 \
+                   http://${CONTROL_HOST_IP}:9696 \
+                   http://${CONTROL_HOST_IP}:9696 \
                    "RegionOne"
 
 initialize_service "swift" \
                    "object-store" \
                    "OpenStack Object Storage" \
                    ${SERVICE_PASSWORD} \
-                   http://${CONTROL_HOST}:8888/v1/AUTH_%\(tenant_id\)s \
-                   http://${CONTROL_HOST}:8888/v1/AUTH_%\(tenant_id\)s \
-                   http://${CONTROL_HOST}:8888 \
+                   http://${CONTROL_HOST_IP}:8888/v1/AUTH_%\(tenant_id\)s \
+                   http://${CONTROL_HOST_IP}:8888/v1/AUTH_%\(tenant_id\)s \
+                   http://${CONTROL_HOST_IP}:8888 \
                    "RegionOne"
 
 
@@ -78,35 +78,35 @@ initialize_service "glance" \
                    "image" \
                    "OpenStack Image Service" \
                    ${SERVICE_PASSWORD} \
-                   http://${CONTROL_HOST}:9292 \
-                   http://${CONTROL_HOST}:9292 \
-                   http://${CONTROL_HOST}:9292 \
+                   http://${CONTROL_HOST_IP}:9292 \
+                   http://${CONTROL_HOST_IP}:9292 \
+                   http://${CONTROL_HOST_IP}:9292 \
                    "RegionOne"
 
 initialize_service "nova" \
                    "compute" \
                    "OpenStack Compute Service" \
                    ${SERVICE_PASSWORD} \
-                   http://${CONTROL_HOST}:8774/v2.1 \
-                   http://${CONTROL_HOST}:8774/v2.1 \
-                   http://${CONTROL_HOST}:8774/v2.1 \
+                   http://${CONTROL_HOST_IP}:8774/v2.1 \
+                   http://${CONTROL_HOST_IP}:8774/v2.1 \
+                   http://${CONTROL_HOST_IP}:8774/v2.1 \
                    "RegionOne"
 
 initialize_service "placement" \
                    "placement" \
                    "OpenStack Placement Service" \
                    ${SERVICE_PASSWORD} \
-                   http://${CONTROL_HOST}:8778 \
-                   http://${CONTROL_HOST}:8778 \
-                   http://${CONTROL_HOST}:8778 \
+                   http://${CONTROL_HOST_IP}:8778 \
+                   http://${CONTROL_HOST_IP}:8778 \
+                   http://${CONTROL_HOST_IP}:8778 \
                    "RegionOne"
 
 initialize_service "ironic" \
                    "baremetal" \
                    "OpenStack Bare Metal Service" \
                    ${SERVICE_PASSWORD} \
-                   http://${CONTROL_HOST}:6385 \
-                   http://${CONTROL_HOST}:6385 \
-                   http://${CONTROL_HOST}:6385 \
+                   http://${CONTROL_HOST_IP}:6385 \
+                   http://${CONTROL_HOST_IP}:6385 \
+                   http://${CONTROL_HOST_IP}:6385 \
                    "RegionOne"
 

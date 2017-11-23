@@ -9,7 +9,7 @@ GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'%' \
        IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';
 EOF
 
-mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST} < /tmp/create_database.sql
+mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST_IP} < /tmp/create_database.sql
 
 echo ${CONTROL_HOST}
 
@@ -27,9 +27,9 @@ keystone-manage db_sync
 keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
 keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
 keystone-manage bootstrap --bootstrap-password $KEYSTONE_ADMIN_PASSWORD \
-  --bootstrap-admin-url http://${CONTROL_HOST}:35357/v3/ \
-  --bootstrap-internal-url http://${CONTROL_HOST}:5000/v3/ \
-  --bootstrap-public-url http://${CONTROL_HOST}:5000/v3/ \
+  --bootstrap-admin-url http://${CONTROL_HOST_IP}:35357/v3/ \
+  --bootstrap-internal-url http://${CONTROL_HOST_IP}:5000/v3/ \
+  --bootstrap-public-url http://${CONTROL_HOST_IP}:5000/v3/ \
   --bootstrap-region-id RegionOne
 
 # Start apache

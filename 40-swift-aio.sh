@@ -1,6 +1,6 @@
 # Starts the Swift service
 docker run  \
-           -v /dev/loop0:/dev/loop0 \
+           -v /dev/loop1:/dev/loop1 \
            --net swiftnet \
            --ip 172.16.16.16 \
            --env-file ./config \
