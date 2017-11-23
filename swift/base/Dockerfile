@@ -2,7 +2,7 @@ FROM hogepodge/swift:centos
 MAINTAINER chris@openstack.org
 # Swift implementation taken from https://github.com/ccollicutt/docker-swift-onlyone
 ADD /swift.conf /etc/swift/swift.conf
-ADD /proxy-server.conf /etc/swift/proxy-server.conf
+ADD /generate.proxy-server.conf /generate.proxy-server.conf
 ADD /account-server.conf /etc/swift/account-server.conf
 ADD /container-server.conf /etc/swift/container-server.conf
 ADD /object-server.conf /etc/swift/object-server.conf
@@ -20,4 +20,6 @@ RUN set -x \
                    liberasurecode \
                    memcached \
                    supervisor \
-                   vim
+                   vim \
+    && pip install keystonemiddleware
+ENTRYPOINT ["/start-service.sh"]

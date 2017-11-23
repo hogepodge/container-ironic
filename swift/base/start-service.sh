@@ -1,5 +1,8 @@
 #!/bin/bash
 set -x
+
+./generate.proxy-server.conf
+
 mount /dev/loop1 /srv
 if [ -e /srv/account.builder ]; then
   echo "Ring files already exist in /srv, copying them to /etc/swift..."
@@ -47,8 +50,6 @@ fi
 
 memcached -u swift &
 
-swift-proxy-server /etc/swift/proxy-server.conf -v &
-
 swift-container-server /etc/swift/container-server.conf -v &
 swift-container-auditor /etc/swift/container-server.conf -v &
 swift-container-sync /etc/swift/container-server.conf -v &
@@ -63,6 +64,7 @@ swift-object-auditor /etc/swift/object-server.conf -v &
 swift-object-replicator /etc/swift/object-server.conf -v &
 swift-object-updater /etc/swift/object-server.conf -v &
 
+swift-proxy-server /etc/swift/proxy-server.conf -v
 
 #echo "Starting supervisord..."
 #/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
