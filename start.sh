@@ -23,7 +23,8 @@
 ./63-ironic-nginx.sh
 ./65-ironic-conductor.sh
 ./67-ironic-agent.sh
-./70-nova-api.sh
-./71-nova-conductor.sh
-./72-nova-scheduler.sh
-./73-nova-compute.sh
+./70-nova-placement.sh
+./71-nova-api.sh
+./72-nova-conductor.sh
+./73-nova-scheduler.sh
+./74-nova-compute.sh
