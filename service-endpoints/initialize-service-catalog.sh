@@ -60,8 +60,8 @@ initialize_service "neutron" \
                    "OpenStack Networking Service" \
                    ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST_IP}:9696 \
-                   http://${CONTROL_HOST_IP}:9696 \
-                   http://${CONTROL_HOST_IP}:9696 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:9696 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:9696 \
                    "RegionOne"
 
 initialize_service "swift" \
@@ -69,8 +69,8 @@ initialize_service "swift" \
                    "OpenStack Object Storage" \
                    ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST_IP}:8888/v1/AUTH_%\(tenant_id\)s \
-                   http://${CONTROL_HOST_IP}:8888/v1/AUTH_%\(tenant_id\)s \
-                   http://${CONTROL_HOST_IP}:8888 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:8888/v1/AUTH_%\(tenant_id\)s \
+                   http://${CONTROL_HOST_PRIVATE_IP}:8888 \
                    "RegionOne"
 
 
@@ -79,8 +79,8 @@ initialize_service "glance" \
                    "OpenStack Image Service" \
                    ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST_IP}:9292 \
-                   http://${CONTROL_HOST_IP}:9292 \
-                   http://${CONTROL_HOST_IP}:9292 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:9292 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:9292 \
                    "RegionOne"
 
 initialize_service "nova" \
@@ -88,8 +88,8 @@ initialize_service "nova" \
                    "OpenStack Compute Service" \
                    ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST_IP}:8774/v2.1 \
-                   http://${CONTROL_HOST_IP}:8774/v2.1 \
-                   http://${CONTROL_HOST_IP}:8774/v2.1 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:8774/v2.1 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:8774/v2.1 \
                    "RegionOne"
 
 initialize_service "placement" \
@@ -97,8 +97,8 @@ initialize_service "placement" \
                    "OpenStack Placement Service" \
                    ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST_IP}:8778 \
-                   http://${CONTROL_HOST_IP}:8778 \
-                   http://${CONTROL_HOST_IP}:8778 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:8778 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:8778 \
                    "RegionOne"
 
 initialize_service "ironic" \
@@ -106,7 +106,7 @@ initialize_service "ironic" \
                    "OpenStack Bare Metal Service" \
                    ${SERVICE_PASSWORD} \
                    http://${CONTROL_HOST_IP}:6385 \
-                   http://${CONTROL_HOST_IP}:6385 \
-                   http://${CONTROL_HOST_IP}:6385 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:6385 \
+                   http://${CONTROL_HOST_PRIVATE_IP}:6385 \
                    "RegionOne"
 

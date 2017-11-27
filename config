@@ -1,6 +1,7 @@
 ### General settings
 CONTROL_HOST=control
 CONTROL_HOST_IP=192.168.1.44
+CONTROL_HOST_PRIVATE_IP=192.168.30.1
 
 ### RabbitMQ credentials
 RABBITMQ_DEFAULT_PASS=rabbitpass
@@ -19,6 +20,8 @@ SWIFT_USER_PASSWORD=testing
 SWIFT_ADMIN_KEY=TheSwiftAdminKey
 SWIFT_HASH_PATH_PREFIX=TheSwiftPrefix
 SWIFT_HASH_PATH_SUFFIX=TheSwiftSuffix
+SWIFT_TEMP_URL_KEY=TempURLKey
+SWIFT_GLANCE_ACCOUNT=
 
 # This is the network interface that neutron will use to provide
 # network services to the bare metal compute instances.

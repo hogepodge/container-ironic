@@ -4,7 +4,7 @@
 # Rabbit happy about who and how connects to it.
 docker run -d \
            --env-file ./config \
-           --hostname rabbitmq \
+           --hostname control \
            --name rabbitmq  \
            --restart unless-stopped \
            -p=5672:5672 \
