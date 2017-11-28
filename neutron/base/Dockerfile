@@ -21,5 +21,6 @@ RUN set -x \
     && chmod 750 /etc/sudoers.d \
     && chmod 440 /etc/sudoers.d/neutron_sudoers \
     && chown -R root:neutron /etc/neutron \
+    && chown -R root:root /etc/neutron/rootwrap.d \
     && chmod 740 /etc/neutron/rootwrap.conf \
     && chmod -R 740 /etc/neutron/rootwrap.d

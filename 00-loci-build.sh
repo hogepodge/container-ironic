@@ -9,18 +9,20 @@ cd /tmp/loci
 docker build -t hogepodge/base:centos dockerfiles/centos
 docker push hogepodge/base:centos
 
+#PROJECTS=("requirements")
 PROJECTS=("requirements" "cinder" "glance" "heat" "horizon" "ironic" "keystone" "neutron" "nova" "swift")
 
 for project in "${PROJECTS[@]}"
 do
-  result = docker build \
+  result= docker build \
       https://git.openstack.org/openstack/loci.git \
       --build-arg PROJECT=$project \
+      --build-arg PROJECT_REF=stable/pike \
       --build-arg FROM=hogepodge/base:centos \
       --build-arg WHEELS=hogepodge/requirements:centos \
-      --tag hogepodge/$project:centos
+      --tag hogepodge/$project:centos --no-cache
 
-  if $result -eq 1; then
+  if [ $? = 0 ]; then
       SUCCESS=("${SUCCESS[@]}" $project)
       docker push hogepodge/$project:centos
   else

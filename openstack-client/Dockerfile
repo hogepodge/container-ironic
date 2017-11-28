@@ -7,3 +7,5 @@ RUN yum update -y; \
     pip install --upgrade pip; \
     pip install python-openstackclient python-ironicclient python-neutronclient
 ADD /adminrc /adminrc
+ADD /glancerc /glancerc
+ADD /ironicrc /ironicrc

@@ -1,1 +1,1 @@
-neutron ALL = (root) NOPASSWD: /usr/bin/neutron-rootwrap /etc/nova/rootwrap.conf *
+neutron ALL = (root) NOPASSWD: /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf *
