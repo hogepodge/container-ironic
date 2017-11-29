@@ -14,6 +14,7 @@ KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
 
 ### Neutron Settings
 METADATA_SECRET=TheMetadataSecret
+NEUTRON_DEBUG=false
 
 ### Swift Settings
 SWIFT_USER_PASSWORD=testing

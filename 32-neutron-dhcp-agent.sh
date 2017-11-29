@@ -6,4 +6,5 @@ docker run -d \
            --cap-add=NET_ADMIN \
            --cap-add=ALL \
            --net=host \
+           --sysctl net.ipv4.conf.all.promote_secondaries=1 \
            neutron-dhcp-agent:centos 

@@ -10,8 +10,7 @@ EOF
 
 mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST_IP} < /tmp/create_database.sql
 
-/generate.neutron.conf
-/generate.linuxbridge_agent.ini
+/generate.configs.sh
 
 neutron-db-manage --config-file /etc/neutron/neutron.conf \
   --config-file /etc/neutron/plugins/ml2/ml2_conf.ini upgrade head
