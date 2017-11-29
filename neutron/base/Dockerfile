@@ -3,6 +3,7 @@ MAINTAINER chris@openstack.org
 ADD /etc/neutron/ /etc/neutron/
 ADD /generate.neutron.conf /generate.neutron.conf
 ADD /generate.linuxbridge_agent.ini /generate.linuxbridge_agent.ini
+ADD /generate.metadata_agent.ini /generate.metadata_agent.ini
 ADD /generate.configs.sh /generate.configs.sh
 ADD /neutron_sudoers /etc/sudoers.d/neutron_sudoers
 RUN set -x \
