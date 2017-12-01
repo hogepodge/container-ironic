@@ -16,13 +16,16 @@ KEYSTONE_ADMIN_PASSWORD=keystoneadminpassword
 METADATA_SECRET=TheMetadataSecret
 NEUTRON_DEBUG=false
 
+## Nova Settings
+NOVA_DEBUG=true
+
 ### Swift Settings
 SWIFT_USER_PASSWORD=testing
 SWIFT_ADMIN_KEY=TheSwiftAdminKey
 SWIFT_HASH_PATH_PREFIX=TheSwiftPrefix
 SWIFT_HASH_PATH_SUFFIX=TheSwiftSuffix
 SWIFT_TEMP_URL_KEY=TempURLKey
-SWIFT_GLANCE_ACCOUNT=AUTH_6cd70770b554441bbaeedd7fe70d330c
+SWIFT_GLANCE_ACCOUNT=AUTH_9d1f919bcd784710afa393acfa567e48
 
 # This is the network interface that neutron will use to provide
 # network services to the bare metal compute instances.
@@ -46,5 +49,5 @@ dhcp-host=0c:c4:7a:9a:3c:64,192.168.20.13"
 
 ### Ironic Settings
 IRONIC_DEBUG=false
-CLEANING_NETWORK=72307cb3-bde5-45e6-94f1-80dcdc450332
-PROVISIONING_NETWORK=72307cb3-bde5-45e6-94f1-80dcdc450332
+CLEANING_NETWORK=54d79758-881d-4e72-b62d-6465a6ca53d0
+PROVISIONING_NETWORK=54d79758-881d-4e72-b62d-6465a6ca53d0

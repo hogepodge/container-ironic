@@ -26,5 +26,4 @@ docker volume create --name ironic-imagedata-volume
 docker run -v ironic-imagedata-volume:/imagedata \
            --name ironic-imagedata \
            -it \
-           --rm \
            ironic-imagedata

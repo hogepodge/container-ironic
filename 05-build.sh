@@ -24,6 +24,7 @@ docker build glance/registry/. --tag glance-registry:centos
 docker build ironic/base/. --tag ironic-base:centos
 docker build ironic/database/. --tag ironic-database:centos
 docker build ironic/api/. --tag ironic-api:centos
+docker build ironic/iscsi/. --tag ironic-iscsi:centos
 docker build ironic/conductor/. --tag ironic-conductor:centos
 docker build ironic/imagedata/. --tag ironic-imagedata
 docker build ironic/tftp/. --tag ironic-tftp:centos
