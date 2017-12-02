@@ -6,4 +6,5 @@ docker run -d \
            --link=rabbitmq:rabbitmq \
            --link=mariadb:mariadb \
            -p=8774:8774 \
+           -p=8775:8775 \
            nova-api:centos

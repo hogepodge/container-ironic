@@ -10,4 +10,4 @@ docker run -d \
            --name mariadb \
            --restart unless-stopped \
            -p=3306:3306 \
-           mariadb:10.1.22
+           mariadb:10.1.22 --max-connections=2000

@@ -1,0 +1,13 @@
+DIB_DEV_USER_USERNAME=hoge \
+DIB_DEV_USER_PWDLESS_SUDO=true \
+DIB_DEV_USER_AUTHORIZED_KEYS=~/.ssh/id_rsa.pub \
+disk-image-create \
+    centos7 \
+    dhcp-all-interfaces \
+    cloud-init-nocloud \
+    devuser \
+    yum \
+    epel \
+    baremetal \
+    -o centos7.qcow2 \
+    -p vim

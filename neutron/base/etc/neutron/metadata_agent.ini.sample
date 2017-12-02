@@ -20,7 +20,7 @@
 
 # IP address or DNS name of Nova metadata server. (unknown value)
 # Deprecated group/name - [DEFAULT]/nova_metadata_ip
-#nova_metadata_host = 127.0.0.1
+nova_metadata_host = ${CONTROL_HOST_IP}
 
 # TCP Port used by Nova metadata server. (port value)
 # Minimum value: 0
@@ -32,7 +32,7 @@
 # but it must match here and in the configuration used by the Nova Metadata
 # Server. NOTE: Nova uses the same config key, but in [neutron] section.
 # (string value)
-#metadata_proxy_shared_secret =
+metadata_proxy_shared_secret = ${METADATA_SECRET}
 
 # Protocol to access nova metadata, http or https (string value)
 # Allowed values: http, https
