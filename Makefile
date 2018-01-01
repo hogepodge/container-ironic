@@ -1,6 +1,39 @@
-
-
 build = docker build
+push = docker push hogepodge/
+
+##### LOCI Build
+# Begin by building the Loci packages and pushing them to Docker Hub.
+#
+# make loci: build and push all of the Loci images
+#####
+
+LOCI_PROJECTS = requirements \
+				cinder \
+				glance \
+				heat \
+				horizon \
+				ironic \
+				keystone \
+				neutron \
+				nova \
+				swift \
+
+loci-build-base:
+	git clone https://git.openstack.org/openstack/loci.git /tmp/loci
+	$(build) -t hogepodge/base:centos /tmp/loci/dockerfiles/centos
+	$(push)/base:centos
+
+$(LOCI_PROJECTS):
+	$(build) https://git.openstack.org/openstack/loci.git \
+		--build-arg PROJECT=$@ \
+		--build-arg PROJECT_REF=stable/pike \
+		--build-arg FROM=hogepodge/base:centos \
+		--build-arg WHEELS=hogepodge/requirements:centos \
+		--tag hogepodge/$@:centos --no-cache
+	$(push)/$@:centos
+
+loci: loci-build-base $(LOCI_PROJECTS)
+
 
 KEYSTONE_TARGETS = keystone-api
 keystone: $(KEYSTONE_TARGETS)
@@ -48,6 +81,7 @@ TARGETS += $(SWIFT_TARGETS)
 TARGETS += $(GLANCE_TARGETS)
 TARGETS += $(IRONIC_TARGETS)
 TARGETS += $(NOVA_TARGETS)
+
 all: $(TARGETS)
 
 $(TARGETS):
