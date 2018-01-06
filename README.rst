@@ -38,11 +38,10 @@ Getting Started
 ---------------
 
 Begin by configuring your Docker to use your own Docker Hub for image
-storage. Edit your Docker environment to access your Docker Hub account,
-the replace every instance of `hogepodge` within this repository with
-your Docker Hub account name.
+storage. Export the name of you Docker Hub namespace into the
+`DOCKERHUB_NAMESPACE` evnironment variable.
 
-You can the build the Loci images by running `make loci`. This will
+You can the then build the Loci images by running `make loci`. This will
 build the base loci images and push them to your Docker Hub account.
 
 Follow up with building the application images by running `make all`.
@@ -54,3 +53,15 @@ environment specific values.
 Deploy by running the shell scripts in numerical order.
 
 Have a good time with OpenStack!
+
+Step-by-step `make` commands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Load the necessary kernel modules for Neutron and Cinder
+    * `make kernel-modules`
+* Build the Loci images and push them to Docker Hub
+    * `make loci`
+* Start the base services, MariaDB and RabbitMQ
+    * `make start-base-services`
+    * These services can be stopped and cleaned with the
+      `make stop-base-services` and `make clean-base-services` commands.

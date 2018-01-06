@@ -1,6 +1,3 @@
-./05-build.sh
-./10-rabbitmq.sh
-./13-mariadb.sh
 ./17-keystone-api.sh
 ./20-RUNONCE-service-endpoints.sh
 ./21-neutron-database.sh

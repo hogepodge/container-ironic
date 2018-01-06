@@ -1,5 +1,4 @@
-docker stop rabbitmq \
-            mariadb \
+docker stop \
             dnsmasq-ipmi \
             keystone \
             neutron-server \
@@ -21,8 +20,7 @@ docker stop rabbitmq \
             nova-compute
            
 
-docker rm rabbitmq \
-          mariadb \
+docker rm \
           dnsmasq-ipmi \
           keystone \
           neutron-server \
@@ -45,6 +43,5 @@ docker rm rabbitmq \
           nova-placement \
           service-endpoints
 
-docker volume rm mariadb-volume
 docker volume rm swiftconfig
 docker volume rm swiftdata
