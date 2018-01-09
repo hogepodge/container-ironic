@@ -159,3 +159,22 @@ stop-mariadb:
 clean-mariadb: stop-mariadb
 	$(remove) mariadb
 	docker volume rm mariadb-volume
+
+build-dnsmasq:
+	$(build) dnsmasq/. --tag dnsmasq:ipmi
+
+start-dnsmasq:
+	$(run) -d \
+		--env-file ./config \
+        --name dnsmasq-ipmi \
+        -p 53:53 \
+        -p 53:53/udp \
+        --cap-add=NET_ADMIN \
+        --net=host \
+        dnsmasq:ipmi
+
+stop-dnsmasq:
+	$(stop) dnsmasq-ipmi
+
+clean-dnsmasq: stop-dnsmasq
+	$(remove) dnsmasq-ipmi
