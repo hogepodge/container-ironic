@@ -65,7 +65,8 @@ loci: loci-build-base $(LOCI_PROJECTS)
 ####
 
 SERVICE_CONTAINERS = service-keystone \
-					 service-glance
+					 service-glance \
+					 service-swift
 
 $(SERVICE_CONTAINERS):
 	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
@@ -123,6 +124,32 @@ stop-glance-registry:
 clean-glance-registry: stop-glance-registry
 	$(remove) glance-registry
 
+create-swiftnet:
+	docker network create --subnet 172.16.16.0/24 swiftnet
+
+destroy-swiftnet:
+	docker network rm swiftnet
+
+start-swift-proxy: create-swiftnet
+	$(run) -d \
+           -v /dev/loop1:/dev/loop1 \
+           --net swiftnet \
+           --ip 172.16.16.16 \
+           --env-file ./config \
+           --hostname swift \
+           --name swift-proxy \
+           --privileged \
+           -p=8888:8080 \
+           --rm \
+           $(DOCKERHUB_NAMESPACE)/service-swift:pike-centos \
+           /start-service.sh
+
+stop-swift-proxy: destroy-swiftnet
+	$(stop) swift-proxy
+
+clean-swift-proxy: stop-swift-proxy
+	$(remove-swift-proxy)
+
 NEUTRON_TARGETS = neutron-base \
 				  neutron-database \
 				  neutron-server \
@@ -131,15 +158,6 @@ NEUTRON_TARGETS = neutron-base \
 				  neutron-metadata_agent \
 				  neutron-provider
 neutron: $(NEUTRON_TARGETS)
-
-SWIFT_TARGETS = swift-base
-swift: $(SWIFT_TARGETS)
-
-GLANCE_TARGETS = glance-base \
-				 glance-database \
-				 glance-api \
-				 glance-registry
-glance: $(GLANCE_TARGETS)
 
 IRONIC_TARGETS = ironic-base \
 				 ironic-database \
@@ -160,10 +178,7 @@ NOVA_TARGETS = nova-base \
 			   nova-compute \
 			   nova-placement
 
-TARGETS = $(KEYSTONE_TARGETS)
-TARGETS += $(NEUTRON_TARGETS)
-TARGETS += $(SWIFT_TARGETS)
-TARGETS += $(GLANCE_TARGETS)
+TARGETS = $(NEUTRON_TARGETS)
 TARGETS += $(IRONIC_TARGETS)
 TARGETS += $(NOVA_TARGETS)
 

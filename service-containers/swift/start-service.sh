@@ -1,6 +1,8 @@
 #!/bin/bash
 set -x
 
+/initialize-keystone.sh
+
 ./generate.proxy-server.conf
 
 mount /dev/loop1 /srv

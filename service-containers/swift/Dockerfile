@@ -1,4 +1,4 @@
-FROM hogepodge/swift:centos
+FROM hogepodge/loci-swift:pike-centos
 MAINTAINER chris@openstack.org
 # Swift implementation taken from https://github.com/ccollicutt/docker-swift-onlyone
 ADD /swift.conf /etc/swift/swift.conf
@@ -9,6 +9,7 @@ ADD /object-server.conf /etc/swift/object-server.conf
 ADD /object-expirer.conf /etc/swift/object-expirer.conf
 ADD /rsyncd.conf /etc/rsyncd.conf
 ADD /supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD /initialize-keystone.sh /initialize-keystone.sh
 ADD /start-service.sh /start-service.sh
 RUN set -x \
     && mkdir -p /var/cache/swift \
@@ -21,5 +22,14 @@ RUN set -x \
                    memcached \
                    supervisor \
                    vim \
+                   gcc \
+                   pyton-devel \
+                   wget \
+                   curl \
+                   which \
+    && yum install -y epel-release \
+    && yum install -y python-pip \
+    && yum clean all \
+    && pip install --upgrade pip \
+    && pip install python-openstackclient \
     && pip install keystonemiddleware
-ENTRYPOINT ["/start-service.sh"]
