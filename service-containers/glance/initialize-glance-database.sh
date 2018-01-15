@@ -10,6 +10,4 @@ EOF
 
 mysql -u root -p$MYSQL_ROOT_PASSWORD -h ${CONTROL_HOST_IP} < /tmp/create_database.sql
 
-/generate.glance-api.conf
-/generate.glance-registry.conf
 glance-manage db_sync

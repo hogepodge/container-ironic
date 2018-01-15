@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/wait-for-it.sh mariadb:3306 -t 30
+
 # Create the initial database user
 cat > /tmp/create_database.sql <<-EOF
 CREATE DATABASE IF NOT EXISTS keystone CHARACTER SET utf8;
@@ -27,9 +29,9 @@ keystone-manage db_sync
 keystone-manage fernet_setup --keystone-user keystone --keystone-group keystone
 keystone-manage credential_setup --keystone-user keystone --keystone-group keystone
 keystone-manage bootstrap --bootstrap-password $KEYSTONE_ADMIN_PASSWORD \
-  --bootstrap-admin-url http://${CONTROL_HOST_IP}:35357/v3/ \
-  --bootstrap-internal-url http://${CONTROL_HOST_IP}:5000/v3/ \
-  --bootstrap-public-url http://${CONTROL_HOST_IP}:5000/v3/ \
+  --bootstrap-admin-url https://${CONTROL_HOST_IP}:35357/v3/ \
+  --bootstrap-internal-url https://${CONTROL_HOST_IP}:5000/v3/ \
+  --bootstrap-public-url https://${CONTROL_HOST_IP}:5000/v3/ \
   --bootstrap-region-id RegionOne
 
 # Start apache

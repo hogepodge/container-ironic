@@ -2,13 +2,16 @@
 
 set -x
 
+/wait-for-it.sh ${CONTROL_HOST}:35357 -t 30
+
 function create_service_user() {
   SERVICE_NAME="$1"
   SERVICE_PASSWORD="$2"
 
   openstack --insecure user show ${SERVICE_NAME}
 
-  if [ $? -eq 1 ] then
+  if [ $? -eq 1 ]
+  then
     openstack --insecure user create --password ${SERVICE_PASSWORD} ${SERVICE_NAME}
     openstack --insecure role add --user ${SERVICE_NAME} --project service admin
   fi
@@ -21,7 +24,8 @@ function create_service() {
 
   openstack --insecure service show ${SERVICE_NAME}
 
-  if [ $? -eq 1 ] then
+  if [ $? -eq 1 ]
+  then
       openstack --insecure service create --name ${SERVICE_NAME} \
                                           --description ${SERVICE_DESCRIPTION} \
                                           ${SERVICE_TYPE}
@@ -41,6 +45,7 @@ function create_service_endpoint() {
       grep ${ENDPOINT}
 
   if [ $? -eq 1 ]
+  then
       openstack --insecure endpoint create --region ${REGION} \
                                           ${SERVICE_TYPE} \
                                           ${ENDPOINT_TYPE} \
@@ -75,6 +80,7 @@ export OS_IDENTITY_API_VERSION=3
 openstack --insecure project show service
 
 if [ $? -eq 1 ]
+then
     openstack --insecure project create service --description "General service project"
 fi
 

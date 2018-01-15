@@ -3,6 +3,10 @@
 #
 ####
 
+OPENSTACK_RELEASE=pike
+DOCKERHUB_NAMESPACE=hogepodge
+EMPTY:=
+
 build = docker build
 run = docker run
 push = docker push $(DOCKERHUB_NAMESPACE)
@@ -20,22 +24,22 @@ kernel-modules:
 	sudo modprobe ip6_tables
 	sudo modprobe ebtables
 
-##### LOCI Build
+##### Loci Containers
 # Building the Loci packages and push them to Docker Hub.
 #
 # make loci: build and push all of the Loci images
 #####
 
-LOCI_PROJECTS = requirements \
-				cinder \
-				glance \
-				heat \
-				horizon \
-				ironic \
-				keystone \
-				neutron \
-				nova \
-				swift \
+LOCI_PROJECTS = loci-requirements \
+				loci-cinder \
+				loci-glance \
+				loci-heat \
+				loci-horizon \
+				loci-ironic \
+				loci-keystone \
+				loci-neutron \
+				loci-nova \
+				loci-swift \
 
 loci-build-base:
 	rm -rf /tmp/loci
@@ -45,18 +49,79 @@ loci-build-base:
 
 $(LOCI_PROJECTS):
 	$(build) https://git.openstack.org/openstack/loci.git \
-		--build-arg PROJECT=$@ \
-		--build-arg PROJECT_REF=stable/pike \
+		--build-arg PROJECT=$(subst loci-,$(EMPTY),$@) \
+		--build-arg PROJECT_REF=stable/$(OPENSTACK_RELEASE) \
 		--build-arg FROM=$(DOCKERHUB_NAMESPACE)/base:centos \
-		--build-arg WHEELS=$(DOCKERHUB_NAMESPACE)/requirements:centos \
-		--tag $(DOCKERHUB_NAMESPACE)/$@:centos --no-cache
-	$(push)/$@:centos
+		--build-arg WHEELS=$(DOCKERHUB_NAMESPACE)/loci-requirements:$(OPENSTACK_RELEASE)-centos \
+		--tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos --no-cache
+	$(push)/$@:$(OPENSTACK_RELEASE)-centos
 
 loci: loci-build-base $(LOCI_PROJECTS)
 
+#### Service Containers
+# Building the all-in-one service containers with configuration and startup scripts
+#
+# make service-containers
+####
 
-KEYSTONE_TARGETS = keystone-api
-keystone: $(KEYSTONE_TARGETS)
+SERVICE_CONTAINERS = service-keystone \
+					 service-glance
+
+$(SERVICE_CONTAINERS):
+	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
+		service-containers/$(subst service-,$(EMPTY),$@)
+
+start-keystone-api:
+	$(run) -d \
+		--env-file ./config \
+		--hostname keystone \
+		--name keystone-api \
+		--link=rabbitmq:rabbitmq \
+		--link=mariadb:mariadb \
+        -p=5000:5000 -p=35357:35357  \
+		--volume=/home/hoge/container-ironic/ssl:/etc/ssl \
+		$(DOCKERHUB_NAMESPACE)/service-keystone:$(OPENSTACK_RELEASE)-centos \
+		/start-keystone-api.sh
+
+stop-keystone-api:
+	$(stop) keystone-api
+
+clean-keystone-api: stop-keystone-api
+	$(remove) keystone-api
+
+start-glance-api:
+	$(run) -d \
+           --env-file ./config \
+           --hostname glance-api \
+           --name glance-api \
+           --link=rabbitmq:rabbitmq \
+           --link=mariadb:mariadb \
+           -p=9292:9292 \
+           $(DOCKERHUB_NAMESPACE)/service-glance:pike-centos \
+		   /start-glance-api.sh
+
+stop-glance-api:
+	$(stop) glance-api
+
+clean-glance-api: stop-glance-api
+	$(remove) glance-api
+
+start-glance-registry:
+	$(run) -d \
+           --env-file ./config \
+           --hostname glance-registry \
+           --name glance-registry \
+           --link=rabbitmq:rabbitmq \
+           --link=mariadb:mariadb \
+           -p=9191:9191 \
+           $(DOCKERHUB_NAMESPACE)/service-glance:pike-centos \
+		   /start-glance-registry.sh
+
+stop-glance-registry:
+	$(stop) glance-registry
+
+clean-glance-registry: stop-glance-registry
+	$(remove) glance-registry
 
 NEUTRON_TARGETS = neutron-base \
 				  neutron-database \
@@ -178,3 +243,8 @@ stop-dnsmasq:
 
 clean-dnsmasq: stop-dnsmasq
 	$(remove) dnsmasq-ipmi
+
+####### SSL
+
+ssl:
+	openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout selfsigned.key -out selfsigned.crt

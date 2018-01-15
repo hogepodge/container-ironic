@@ -39,7 +39,7 @@ Getting Started
 
 Begin by configuring your Docker to use your own Docker Hub for image
 storage. Export the name of you Docker Hub namespace into the
-`DOCKERHUB_NAMESPACE` evnironment variable.
+`DOCKERHUB_NAMESPACE` evnironment variable. 
 
 You can the then build the Loci images by running `make loci`. This will
 build the base loci images and push them to your Docker Hub account.
@@ -65,3 +65,16 @@ Step-by-step `make` commands
     * `make start-base-services`
     * These services can be stopped and cleaned with the
       `make stop-base-services` and `make clean-base-services` commands.
+* Build the Keystone service container
+    * `make service-keystone`
+* Run the Keystone API server
+    * `make start-keystone-api`
+* Build the Glance service container
+    * `make service-glance`
+* Run the Glance API and Registry servers
+    * `make start-glance-api start-glance-registry`
+    * Note that all the glance servers will check to see if the Keystone
+      and the database are initialized at startup. No need to manually
+      create a service role, users, or endpoints. This may slow startup,
+      but removes the burden of remembering to initialize the services
+      and hopefully simplifies deployment.
