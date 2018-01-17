@@ -69,6 +69,10 @@ Step-by-step `make` commands
     * `make service-keystone`
 * Run the Keystone API server
     * `make start-keystone-api`
+* Build the Swift service container
+    * `make service-swift`
+* Run Swift
+    * `make start-swift-proxy`
 * Build the Glance service container
     * `make service-glance`
 * Run the Glance API and Registry servers

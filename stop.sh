@@ -6,9 +6,6 @@ docker stop \
             neutron-dhcp-agent \
             neutron-metadata-agent \
             neutron-provider \
-            swift \
-            glance-api\
-            glance-registry \
             ironic-api \
             ironic-tftp \
             ironic-nginx \
@@ -28,9 +25,6 @@ docker rm \
           neutron-dhcp-agent \
           neutron-metadata-agent \
           neutron-provider \
-          swift \
-          glance-api \
-          glance-registry \
           ironic-api \
           ironic-conductor \
           ironic-tftp \

@@ -1,17 +1,17 @@
 #!/bin/bash
 set -x
 
-SERVICE_NAME="swift"
-SERVICE_TYPE="object-store"
+SERVICE_NAME=swift
+SERVICE_TYPE=object-store
 SERVICE_DESCRIPTION="OpenStack Object Service"
 SERVICE_PASSWORD=${SERVICE_PASSWORD}
-PUBLIC_ENDPOINT="http://${CONTROL_HOST_IP}:8888/v1/AUTH_%\(tenant_id\)s"
-PRIVATE_ENDPOINT="http://${CONTROL_HOST_PRIVATE_IP}:8888/v1/AUTH_%\(tenant_id\)s"
-ADMIN_ENDPOINT="http://${CONTROL_HOST_PRIVATE_IP}:8888"
+PUBLIC_ENDPOINT=http://${CONTROL_HOST_IP}:8888/v1/AUTH_%\(tenant_id\)s
+PRIVATE_ENDPOINT=http://${CONTROL_HOST_PRIVATE_IP}:8888/v1/AUTH_%\(tenant_id\)s
+ADMIN_ENDPOINT=http://${CONTROL_HOST_PRIVATE_IP}:8888
 
 function create_service_user() {
-    local SERVICE_NAME="$1"
-    local SERVICE_PASSWORD="$2"
+    local SERVICE_NAME=$1
+    local SERVICE_PASSWORD=$2
 
     openstack --insecure user show ${SERVICE_NAME}
 
@@ -23,8 +23,8 @@ function create_service_user() {
 }
 
 function create_service() {
-  local SERVICE_NAME="$1"
-  local SERVICE_TYPE="$2"
+  local SERVICE_NAME=$1
+  local SERVICE_TYPE=$2
   local SERVICE_DESCRIPTION="$3"
 
   openstack --insecure service show ${SERVICE_NAME}
@@ -38,16 +38,16 @@ function create_service() {
 }
 
 function create_service_endpoint() {
-  local SERVICE_TYPE="$1"
-  local ENDPOINT_TYPE="$2"
-  local ENDPOINT="$3" 
-  local REGION="$4"
+  local SERVICE_TYPE=$1
+  local ENDPOINT_TYPE=$2
+  local ENDPOINT=$3 
+  local REGION=$4
 
   openstack --insecure endpoint list | \
       grep ${REGION} | \
       grep ${SERVICE_TYPE} | \
-      grep ${ENDPOINT_TYPE} | \
-      grep ${ENDPOINT}
+      grep ${ENDPOINT_TYPE} 
+#      grep ${ENDPOINT}
 
   if [ $? -eq 1 ]
   then
@@ -59,14 +59,14 @@ function create_service_endpoint() {
 }
 
 function initialize_service() {
-    local SERVICE_NAME="$1"
-    local SERVICE_TYPE="$2"
+    local SERVICE_NAME=$1
+    local SERVICE_TYPE=$2
     local SERVICE_DESCRIPTION="$3"
-    local SERVICE_PASSWORD="$4"
-    local PUBLIC_ENDPOINT="$5"
-    local INTERNAL_ENDPOINT="$6"
-    local ADMIN_ENDPOINT="$7"
-    local REGION="$8"
+    local SERVICE_PASSWORD=$4
+    local PUBLIC_ENDPOINT=$5
+    local INTERNAL_ENDPOINT=$6
+    local ADMIN_ENDPOINT=$7
+    local REGION=$8
 
     openstack --insecure project show service
 
@@ -76,10 +76,10 @@ function initialize_service() {
     fi
 
     create_service_user ${SERVICE_NAME} ${SERVICE_PASSWORD}
-    create_service "${SERVICE_NAME}" ${SERVICE_TYPE} ${SERVICE_DESCRIPTION}
-    create_service_endpoint "${SERVICE_TYPE}" public ${PUBLIC_ENDPOINT} ${REGION}
-    create_service_endpoint "${SERVICE_TYPE}" internal ${INTERNAL_ENDPOINT} ${REGION}
-    create_service_endpoint "${SERVICE_TYPE}" admin ${ADMIN_ENDPOINT} ${REGION}
+    create_service ${SERVICE_NAME} ${SERVICE_TYPE} ${SERVICE_DESCRIPTION}
+    create_service_endpoint ${SERVICE_TYPE} public ${PUBLIC_ENDPOINT} ${REGION}
+    create_service_endpoint ${SERVICE_TYPE} internal ${INTERNAL_ENDPOINT} ${REGION}
+    create_service_endpoint ${SERVICE_TYPE} admin ${ADMIN_ENDPOINT} ${REGION}
 }
 
 export OS_USERNAME=admin
@@ -98,4 +98,4 @@ initialize_service \
     $PUBLIC_ENDPOINT \
     $PRIVATE_ENDPOINT \
     $ADMIN_ENDPOINT \
-    "Region One"
+    RegionOne

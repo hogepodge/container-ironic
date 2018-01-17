@@ -127,10 +127,10 @@ clean-glance-registry: stop-glance-registry
 create-swiftnet:
 	docker network create --subnet 172.16.16.0/24 swiftnet
 
-destroy-swiftnet:
+destroy-swiftnet: stop-swift-proxy
 	docker network rm swiftnet
 
-start-swift-proxy: create-swiftnet
+start-swift-proxy:
 	$(run) -d \
            -v /dev/loop1:/dev/loop1 \
            --net swiftnet \
@@ -144,10 +144,10 @@ start-swift-proxy: create-swiftnet
            $(DOCKERHUB_NAMESPACE)/service-swift:pike-centos \
            /start-service.sh
 
-stop-swift-proxy: destroy-swiftnet
+stop-swift-proxy:
 	$(stop) swift-proxy
 
-clean-swift-proxy: stop-swift-proxy
+clean-swift-proxy:
 	$(remove-swift-proxy)
 
 NEUTRON_TARGETS = neutron-base \
