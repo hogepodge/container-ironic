@@ -1,10 +1,6 @@
 docker stop \
             dnsmasq-ipmi \
             keystone \
-            neutron-server \
-            neutron-linuxbridge-agent \
-            neutron-dhcp-agent \
-            neutron-metadata-agent \
             neutron-provider \
             ironic-api \
             ironic-tftp \
@@ -20,10 +16,6 @@ docker stop \
 docker rm \
           dnsmasq-ipmi \
           keystone \
-          neutron-server \
-          neutron-linuxbridge-agent \
-          neutron-dhcp-agent \
-          neutron-metadata-agent \
           neutron-provider \
           ironic-api \
           ironic-conductor \

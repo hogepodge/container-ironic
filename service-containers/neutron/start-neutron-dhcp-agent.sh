@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 /generate.configs.sh
 mount -o remount rw /proc/sys
 neutron-dhcp-agent \

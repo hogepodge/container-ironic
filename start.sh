@@ -3,10 +3,6 @@
 ./23-ironic-database.sh
 ./24-nova-database.sh
 ./26-swift-ring.sh
-./30-neutron-server.sh
-./31-neutron-linuxbridge-agent.sh
-./32-neutron-dhcp-agent.sh
-./33-neutron-metadata-agent.sh
 ./34-RUNONCE-neutron-provider.sh
 ./60-ironic-api.sh
 ./61-ironic-imagedata.sh

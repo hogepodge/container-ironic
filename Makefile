@@ -66,7 +66,8 @@ loci: loci-build-base $(LOCI_PROJECTS)
 
 SERVICE_CONTAINERS = service-keystone \
 					 service-glance \
-					 service-swift
+					 service-swift \
+					 service-neutron \
 
 $(SERVICE_CONTAINERS):
 	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
@@ -147,17 +148,76 @@ start-swift-proxy:
 stop-swift-proxy:
 	$(stop) swift-proxy
 
-clean-swift-proxy:
-	$(remove-swift-proxy)
+clean-swift-proxy: stop-swift-proxy
+	$(remove) swift-proxy
 
-NEUTRON_TARGETS = neutron-base \
-				  neutron-database \
-				  neutron-server \
-				  neutron-linuxbridge_agent \
-				  neutron-dhcp_agent \
-				  neutron-metadata_agent \
-				  neutron-provider
-neutron: $(NEUTRON_TARGETS)
+start-neutron-server:
+	$(run) -d \
+           --env-file ./config \
+           --hostname neutron-server \
+           --name neutron-server \
+           --link=rabbitmq:rabbitmq \
+           --link=mariadb:mariadb \
+           -p=9696:9696 \
+           $(DOCKERHUB_NAMESPACE)/service-neutron:pike-centos \
+		   /start-neutron-server.sh
+
+stop-neutron-server:
+	$(stop) neutron-server
+
+clean-neutron-server: stop-neutron-server
+	$(remove) neutron-server
+
+start-neutron-linuxbridge-agent:
+	$(run) -d \
+           --env-file ./config \
+           --hostname neutron-linuxbridge-agent \
+           --name neutron-linuxbridge-agent \
+           --cap-add=ALL \
+           --net=host \
+           --privileged \
+           $(DOCKERHUB_NAMESPACE)/service-neutron:pike-centos \
+		   /start-neutron-linuxbridge-agent.sh
+
+stop-neutron-linuxbridge-agent:
+	$(stop) neutron-linuxbridge-agent
+
+clean-neutron-linuxbridge-agent: stop-neutron-linuxbridge-agent
+	$(remove) neutron-linuxbridge-agent
+
+start-neutron-dhcp-agent:
+	$(run) -d \
+           --env-file ./config \
+           --hostname neutron-dhcp-agent \
+           --name neutron-dhcp-agent \
+           --cap-add=NET_ADMIN \
+           --cap-add=ALL \
+           --net=host \
+           --sysctl net.ipv4.conf.all.promote_secondaries=1 \
+           $(DOCKERHUB_NAMESPACE)/service-neutron:pike-centos \
+		   /start-neutron-dhcp-agent.sh
+
+stop-neutron-dhcp-agent:
+	$(stop) neutron-dhcp-agent
+
+clean-neutron-dhcp-agent: stop-neutron-dhcp-agent
+	$(remove) neutron-dhcp-agent
+
+start-neutron-metadata-agent:
+	$(run) -d \
+           --env-file ./config \
+           --hostname neutron-metadata-agent \
+           --name neutron-metadata-agent \
+           --cap-add=NET_ADMIN \
+           --net=host \
+           $(DOCKERHUB_NAMESPACE)/service-neutron:pike-centos \
+		   /start-neutron-metadata-agent.sh
+
+stop-neutron-metadata-agent:
+	$(stop) neutron-metadata-agent
+
+clean-neutron-metadata-agent: stop-neutron-metadata-agent
+	$(remove) neutron-metadata-agent
 
 IRONIC_TARGETS = ironic-base \
 				 ironic-database \
@@ -178,8 +238,7 @@ NOVA_TARGETS = nova-base \
 			   nova-compute \
 			   nova-placement
 
-TARGETS = $(NEUTRON_TARGETS)
-TARGETS += $(IRONIC_TARGETS)
+TARGETS = $(IRONIC_TARGETS)
 TARGETS += $(NOVA_TARGETS)
 
 all: $(TARGETS)
