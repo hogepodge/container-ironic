@@ -15,6 +15,7 @@ RUN yum upgrade -y \
         libxml2 \
         openvswitch \
         python-pip \
+        which \
     && pip install --upgrade pip \
     && pip install python-ironicclient python-openstackclient
 ADD /etc/nova/ /etc/nova/

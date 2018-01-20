@@ -1,4 +1,4 @@
 #!/bin/bash
-/initalize-nova-database.sh
+/initialize-nova-database.sh
 /initialize-keystone.sh
 nova-api

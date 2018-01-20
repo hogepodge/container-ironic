@@ -1,6 +1,10 @@
 #!/bin/bash
 
+set -x
+
 /wait-for-it.sh --host=${CONTROL_HOST_IP} --port=3306 -t 60
+
+sleep 5
 
 cat > /tmp/create_database.sql <<-EOF
 CREATE DATABASE IF NOT EXISTS nova CHARACTER SET utf8;

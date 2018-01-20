@@ -238,6 +238,66 @@ services:
             - '/dev/disk:/dev/disk'
         command: '/start-ironic-iscsid.sh'
 
+    nova-api:
+        build: 'service-containers/nova/.'
+        env_file: './config'
+        hostname: 'nova-api'
+        extra_hosts:
+            - "control:192.168.1.44"
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        ports:
+            - '8774:8774'
+            - '8775:8775'
+        command: '/start-nova-api.sh'
+
+    nova-placement:
+        build: 'service-containers/nova/.'
+        env_file: './config'
+        hostname: 'nova-placement'
+        extra_hosts:
+            - "control:192.168.1.44"
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        ports:
+            - '8778:8000'
+        command: '/start-nova-placement.sh'
+
+    nova-conductor:
+        build: 'service-containers/nova/.'
+        env_file: './config'
+        hostname: 'nova-conductor'
+        extra_hosts:
+            - "control:192.168.1.44"
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        command: '/start-nova-conductor.sh'
+
+    nova-scheduler:
+        build: 'service-containers/nova/.'
+        env_file: './config'
+        hostname: 'nova-scheduler'
+        extra_hosts:
+            - "control:192.168.1.44"
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        command: '/start-nova-scheduler.sh'
+
+    nova-compute:
+        build: 'service-containers/nova/.'
+        env_file: './config'
+        hostname: 'nova-compute'
+        extra_hosts:
+            - "control:192.168.1.44"
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        command: '/start-nova-compute.sh'
+
 volumes:
     mariadb-volume:
     ironic-imagedata-volume:
