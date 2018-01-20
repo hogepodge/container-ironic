@@ -1,19 +1,15 @@
 #!/bin/bash
 set -x
 
-until $(curl --output /dev/null --silent --head --fail --insecure https://${CONTROL_HOST_IP}:5000); do
-    printf '.'
-    sleep 5
-done
+/wait-for-it.sh --host=${CONTROL_HOST_IP} --port=5000 -t 30
 
-
-SERVICE_NAME=neutron
-SERVICE_TYPE=network
-SERVICE_DESCRIPTION="OpenStack Networking Service"
+SERVICE_NAME=ironic
+SERVICE_TYPE=baremetal
+SERVICE_DESCRIPTION="OpenStack Bare Metal Service"
 SERVICE_PASSWORD=${SERVICE_PASSWORD}
-PUBLIC_ENDPOINT=http://${CONTROL_HOST_IP}:9696
-PRIVATE_ENDPOINT=http://${CONTROL_HOST_PRIVATE_IP}:9696
-ADMIN_ENDPOINT=http://${CONTROL_HOST_PRIVATE_IP}:9696
+PUBLIC_ENDPOINT=http://${CONTROL_HOST_IP}:6385
+PRIVATE_ENDPOINT=http://${CONTROL_HOST_PRIVATE_IP}:6385
+ADMIN_ENDPOINT=http://${CONTROL_HOST_PRIVATE_IP}:6385
 
 function create_service_user() {
     local SERVICE_NAME="$1"

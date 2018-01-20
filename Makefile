@@ -74,57 +74,6 @@ $(SERVICE_CONTAINERS):
 	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
 		service-containers/$(subst service-,$(EMPTY),$@)
 
-start-neutron-linuxbridge-agent:
-	$(run) -d \
-           --env-file ./config \
-           --hostname neutron-linuxbridge-agent \
-           --name neutron-linuxbridge-agent \
-           --cap-add=ALL \
-           --net=host \
-           --privileged \
-           $(DOCKERHUB_NAMESPACE)/service-neutron:pike-centos \
-		   /start-neutron-linuxbridge-agent.sh
-
-stop-neutron-linuxbridge-agent:
-	$(stop) neutron-linuxbridge-agent
-
-clean-neutron-linuxbridge-agent: stop-neutron-linuxbridge-agent
-	$(remove) neutron-linuxbridge-agent
-
-start-neutron-dhcp-agent:
-	$(run) -d \
-           --env-file ./config \
-           --hostname neutron-dhcp-agent \
-           --name neutron-dhcp-agent \
-           --cap-add=NET_ADMIN \
-           --cap-add=ALL \
-           --net=host \
-           --sysctl net.ipv4.conf.all.promote_secondaries=1 \
-           $(DOCKERHUB_NAMESPACE)/service-neutron:pike-centos \
-		   /start-neutron-dhcp-agent.sh
-
-stop-neutron-dhcp-agent:
-	$(stop) neutron-dhcp-agent
-
-clean-neutron-dhcp-agent: stop-neutron-dhcp-agent
-	$(remove) neutron-dhcp-agent
-
-start-neutron-metadata-agent:
-	$(run) -d \
-           --env-file ./config \
-           --hostname neutron-metadata-agent \
-           --name neutron-metadata-agent \
-           --cap-add=NET_ADMIN \
-           --net=host \
-           $(DOCKERHUB_NAMESPACE)/service-neutron:pike-centos \
-		   /start-neutron-metadata-agent.sh
-
-stop-neutron-metadata-agent:
-	$(stop) neutron-metadata-agent
-
-clean-neutron-metadata-agent: stop-neutron-metadata-agent
-	$(remove) neutron-metadata-agent
-
 start-ironic-api:
 	$(run) -d \
            -v ironic-imagedata-volume:/imagedata \

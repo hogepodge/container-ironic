@@ -14,7 +14,7 @@ services:
     rabbitmq:
         image: 'rabbitmq:3'
         env_file: './config'
-        hostname: 'rabbitmq'
+        hostname: 'control'
         ports:
             - '5672:5672'
 
@@ -22,6 +22,8 @@ services:
         build: 'service-containers/keystone/.'
         env_file: './config'
         hostname: 'keystone'
+        extra_hosts:
+            - "control:192.168.1.44"
         ports:
             - '5000:5000'
             - '35357:35357'
@@ -39,6 +41,8 @@ services:
         build: 'service-containers/swift/.'
         env_file: './config'
         hostname: 'swift'
+        extra_hosts:
+            - "control:192.168.1.44"
         privileged: true
         ports:
             - '8888:8080'
@@ -55,6 +59,8 @@ services:
         build: 'service-containers/glance/.'
         env_file: './config'
         hostname: 'glance-api'
+        extra_hosts:
+            - "control:192.168.1.44"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -71,6 +77,8 @@ services:
         build: 'service-containers/glance/.'
         env_file: './config'
         hostname: 'glance-registry'
+        extra_hosts:
+            - "control:192.168.1.44"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -87,6 +95,8 @@ services:
         build: 'service-containers/neutron/.'
         env_file: './config'
         hostname: 'neutron-server'
+        extra_hosts:
+            - "control:192.168.1.44"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -146,8 +156,31 @@ services:
             - 'neutron-server'
         command: '/start-neutron-metadata-agent.sh'
 
+    ironic-api:
+        build: 'service-containers/ironic/.'
+        env_file: './config'
+        hostname: 'ironic-api'
+        extra_hosts:
+            - "control:192.168.1.44"
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        ports:
+            - '6385:6385'
+        volumes:
+            - 'ironic-imagedata-volume:/imagedata'
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+            - 'keystone-api'
+            - 'neutron-server'
+            - 'glance-api'
+            - 'swift-proxy'
+        command: '/start-ironic-api.sh'
+
 volumes:
     mariadb-volume:
+    ironic-imagedata-volume:
 
 networks:
     swiftnet:
