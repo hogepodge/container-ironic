@@ -43,6 +43,7 @@ ADD /start-neutron-metadata-agent.sh /start-neutron-metadata-agent.sh
 ADD /start-neutron-linuxbridge-agent.sh /start-neutron-linuxbridge-agent.sh
 ADD /start-neutron-server.sh /start-neutron-server.sh
 ADD /wait-for-it.sh /wait-for-it.sh
+ADD /adminrc /adminrc
 ADD /neutron_sudoers /etc/sudoers.d/neutron_sudoers
 RUN set -x \
     && chmod 750 /etc/sudoers.d \

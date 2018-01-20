@@ -3,7 +3,7 @@ set -x
 /generate.configs.sh
 mount -o remount rw /proc/sys
 until $(curl --output /dev/null --silent --head http://${CONTROL_HOST_IP}:9696); do
-    printf 'wait on swift'
+    printf 'wait on neutron server'
     sleep 5
 done
 neutron-dhcp-agent \

@@ -18,6 +18,17 @@ services:
         ports:
             - '5672:5672'
 
+    dnsmasq-ipmi:
+        build: 'service-containers/dnsmasq'
+        env_file: './config'
+        ports:
+            - '53:53'
+            - '53:53/udp'
+        cap_add:
+            - 'NET_ADMIN'
+        network_mode: 'host'
+
+
     keystone-api:
         build: 'service-containers/keystone/.'
         env_file: './config'

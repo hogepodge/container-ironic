@@ -16,6 +16,7 @@ ADD /adminrc /adminrc
 ADD /boot.ipxe /etc/ironic/boot.ipxe
 ADD /nginx.conf /etc/nginx/nginx.conf
 RUN yum update -y \
+ && yum install -y epel-release \
  && yum install -y qemu-img \
                    ipmi \
                    nginx \
@@ -38,7 +39,6 @@ RUN yum update -y \
                    python-devel \
                    wget \
                    curl \
- && yum install -y epel-release \
  && pip install --upgrade pip \
  && pip install python-openstackclient \
                 python-swiftclient \
