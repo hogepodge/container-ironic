@@ -1,6 +1,8 @@
 #!/bin/bash
 # Get the tinyipa images and upload to Glance
 
+set -x
+
 source /adminrc
 
 curl -o tinyapi-stable-pike.tar.gz \
@@ -23,3 +25,5 @@ openstack image create \
   --container-format ari \
   --file tinyipa-stable-pike.gz \
   tinyipa.ramdisk
+
+rm tinyipa-stable-pike.vmlinuz tinyipa-stable-pike.gz tinyapi-stable-pike.tar.gz

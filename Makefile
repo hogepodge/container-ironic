@@ -24,6 +24,19 @@ kernel-modules:
 	sudo modprobe ip6_tables
 	sudo modprobe ebtables
 
+##### Swift Storage Directory
+# Make the loopback device to hold swift storage data
+#
+# Assumption is that loop0 is the device this lands on
+#
+# make swift-storage 
+####
+
+swift-storage:
+	truncate -s 50G swift-storage
+	mkfs.xfs swift-storage
+	sudo LOOPDEVICE=`losetup --show -f swift-storage`
+
 ##### Loci Containers
 # Building the Loci packages and push them to Docker Hub.
 #
@@ -74,82 +87,6 @@ $(SERVICE_CONTAINERS):
 	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
 		service-containers/$(subst service-,$(EMPTY),$@)
 
-start-ironic-api:
-	$(run) -d \
-           -v ironic-imagedata-volume:/imagedata \
-           --env-file ./config \
-           --hostname ironic-api \
-           --name ironic-api \
-           --link=rabbitmq:rabbitmq \
-           --link=mariadb:mariadb \
-           -p=6385:6385 \
-           $(DOCKERHUB_NAMESPACE)/service-ironic:pike-centos \
-		   /start-ironic-api.sh
-
-stop-ironic-api:
-	$(stop) ironic-api
-
-clean-ironic-api: stop-ironic-api
-	$(remove) ironic-api
-
-start-ironic-tftp:
-	$(run) -d \
-           -v ironic-imagedata-volume:/imagedata \
-           --name ironic-tftp \
-           -p 69:69/udp \
-           $(DOCKERHUB_NAMESPACE)/service-ironic:pike-centos \
-		   /start-ironic-tftp.sh
-
-stop-ironic-tftp:
-	$(stop) ironic-tftp
-
-clean-ironic-tftp: stop-ironic-tftp
-	$(remove) ironic-tftp
-
-start-ironic-nginx:
-	$(run) -d \
-           -v ironic-imagedata-volume:/imagedata \
-           --name ironic-nginx \
-           -p 8080:8080 \
-           $(DOCKERHUB_NAMESPACE)/service-ironic:pike-centos \
-           /start-ironic-nginx.sh
-
-stop-ironic-nginx:
-	$(stop) ironic-nginx
-
-clean-ironic-nginx: stop-ironic-nginx
-	$(remove)
-
-start-ironic-conductor:
-	$(run) -d \
-           -v ironic-imagedata-volume:/imagedata \
-           -v /dev:/dev:rw \
-           --env-file ./config \
-           --hostname ironic-conductor \
-           --name ironic-conductor \
-           --privileged \
-           --net=host \
-           -p 3260:3260 \
-           $(DOCKERHUB_NAMESPACE)/service-ironic:pike-centos \
-		   /start-ironic-conductor.sh
-
-stop-ironic-conductor:
-	$(stop) ironic-conductor
-
-clean-ironic-conductor: stop-ironic-conductor
-	$(remove)
-
-IRONIC_TARGETS = ironic-base \
-				 ironic-database \
-				 ironic-api \
-				 ironic-iscsi \
-				 ironic-conductor \
-				 ironic-imagedata \
-				 ironic-tftp \
-				 ironic-nginx \
-				 ironic-agent
-ironic: $(IRONIC_TARGETS)
-
 NOVA_TARGETS = nova-base \
 			   nova-database \
 			   nova-api \
@@ -158,8 +95,7 @@ NOVA_TARGETS = nova-base \
 			   nova-compute \
 			   nova-placement
 
-TARGETS = $(IRONIC_TARGETS)
-TARGETS += $(NOVA_TARGETS)
+TARGETS = $(NOVA_TARGETS)
 
 all: $(TARGETS)
 

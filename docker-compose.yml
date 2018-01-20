@@ -48,6 +48,7 @@ services:
             - '8888:8080'
         volumes:
             - '/dev/loop0:/dev/loop1'
+            - './ssl:/etc/ssl'
         networks:
             swiftnet:
                 ipv4_address: '172.16.16.16'
@@ -66,6 +67,8 @@ services:
             - 'rabbitmq'
         ports:
             - '9292:9292'
+        volumes:
+            - './ssl:/etc/ssl'
         depends_on:
             - 'mariadb'
             - 'rabbitmq'
@@ -84,6 +87,8 @@ services:
             - 'rabbitmq'
         ports:
             - '9291:9291'
+        volumes:
+            - './ssl:/etc/ssl'
         depends_on:
             - 'mariadb'
             - 'rabbitmq'
@@ -102,6 +107,8 @@ services:
             - 'rabbitmq'
         ports:
             - '9696:9696'
+        volumes:
+            - './ssl:/etc/ssl'
         depends_on:
             - 'mariadb'
             - 'rabbitmq'
@@ -114,6 +121,8 @@ services:
         hostname: 'neutron-linuxbridge-agent'
         privileged: true
         network_mode: 'host'
+        volumes:
+            - './ssl:/etc/ssl'
         cap_add:
             - ALL
         depends_on:
@@ -129,6 +138,8 @@ services:
         hostname: 'neutron-dhcp-agent'
         privileged: true
         network_mode: 'host'
+        volumes:
+            - './ssl:/etc/ssl'
         cap_add:
             - 'ALL'
             - 'NET_ADMIN'
@@ -147,6 +158,8 @@ services:
         hostname: 'neutron-metadata-agent'
         privileged: true
         network_mode: 'host'
+        volumes:
+            - './ssl:/etc/ssl'
         cap_add:
             - 'NET_ADMIN'
         depends_on:
@@ -168,6 +181,7 @@ services:
         ports:
             - '6385:6385'
         volumes:
+            - './ssl:/etc/ssl'
             - 'ironic-imagedata-volume:/imagedata'
         depends_on:
             - 'mariadb'
@@ -177,6 +191,60 @@ services:
             - 'glance-api'
             - 'swift-proxy'
         command: '/start-ironic-api.sh'
+
+    ironic-conductor:
+        build: 'service-containers/ironic/.'
+        env_file: './config'
+        hostname: 'ironic-conductor'
+        volumes:
+            - './ssl:/etc/ssl'
+            - 'ironic-imagedata-volume:/imagedata'
+            - '/dev:/dev:rw'
+        privileged: true 
+        network_mode: 'host'
+        ports:
+            - '3260:3260'
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+            - 'ironic-api'
+        command: '/start-ironic-conductor.sh'
+
+    ironic-tftp:
+        build: 'service-containers/ironic/.'
+        env_file: './config'
+        hostname: 'ironic-api'
+        extra_hosts:
+            - 'control:192.168.1.44'
+        ports:
+            - '69:69/udp'
+        volumes:
+            - './ssl:/etc/ssl'
+            - 'ironic-imagedata-volume:/imagedata'
+        command: '/start-ironic-tftp.sh'
+
+    ironic-nginx:
+        build: 'service-containers/ironic/.'
+        env_file: './config'
+        hostname: 'ironic-nginx'
+        extra_hosts:
+            - 'control:192.168.1.44'
+        ports: 
+            - '8080:8080'
+        volumes:
+            - 'ironic-imagedata-volume:/imagedata'
+        command: '/start-ironic-nginx.sh'
+
+    ironic-iscsi:
+        build: 'service-containers/ironic/.'
+        env_file: './config'
+        hostname: 'ironic-iscsi'
+        privileged: true
+        network_mode: 'host'
+        volumes:
+            - './ssl:/etc/ssl'
+            - '/dev/disk:/dev/disk'
+        command: '/start-ironic-iscsid.sh'
 
 volumes:
     mariadb-volume:

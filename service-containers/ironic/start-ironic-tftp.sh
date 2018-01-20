@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 /usr/sbin/in.tftpd \
     --foreground \
     --address \

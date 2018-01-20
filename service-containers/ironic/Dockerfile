@@ -7,9 +7,12 @@ ADD /initialize-ironic-database.sh /initialize-ironic-database.sh
 ADD /initialize-keystone.sh /initialize-keystone.sh
 ADD /start-ironic-api.sh /start-ironic-api.sh
 ADD /start-ironic-conductor.sh /start-ironic-conductor.sh
+ADD /start-ironic-iscsid.sh /start-ironic-iscsid.sh
 ADD /start-ironic-nginx.sh /start-ironic-nginx.sh
 ADD /start-ironic-tftp.sh /start-ironic-tftp.sh
+ADD /upload-agent.sh /upload-agent.sh
 ADD /wait-for-it.sh /wait-for-it.sh
+ADD /adminrc /adminrc
 ADD /boot.ipxe /etc/ironic/boot.ipxe
 ADD /nginx.conf /etc/nginx/nginx.conf
 RUN yum update -y \

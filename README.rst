@@ -54,31 +54,14 @@ Deploy by running the shell scripts in numerical order.
 
 Have a good time with OpenStack!
 
-Step-by-step `make` commands
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step-by-step `make` and `docker-compose` commands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * Load the necessary kernel modules for Neutron and Cinder
     * `make kernel-modules`
+* Set up your swift storage endpoint
+    * `make swift-storage`
 * Build the Loci images and push them to Docker Hub
     * `make loci`
-* Start the base services, MariaDB and RabbitMQ
-    * `make start-base-services`
-    * These services can be stopped and cleaned with the
-      `make stop-base-services` and `make clean-base-services` commands.
-* Build the Keystone service container
-    * `make service-keystone`
-* Run the Keystone API server
-    * `make start-keystone-api`
-* Build the Swift service container
-    * `make service-swift`
-* Run Swift
-    * `make start-swift-proxy`
-* Build the Glance service container
-    * `make service-glance`
-* Run the Glance API and Registry servers
-    * `make start-glance-api start-glance-registry`
-    * Note that all the glance servers will check to see if the Keystone
-      and the database are initialized at startup. No need to manually
-      create a service role, users, or endpoints. This may slow startup,
-      but removes the burden of remembering to initialize the services
-      and hopefully simplifies deployment.
+* Start the services with `docker-compose`
+    * `docker-compose up`

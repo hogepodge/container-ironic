@@ -1,7 +1,10 @@
 #!/bin/bash
 set -x
 
-/wait-for-it.sh --host=${CONTROL_HOST_IP} --port=5000 -t 30
+until $(curl --output /dev/null --silent --head --fail http://${CONTROL_HOST_IP}:5000); do
+    printf '.'
+    sleep 5
+done
 
 SERVICE_NAME=ironic
 SERVICE_TYPE=baremetal
@@ -15,12 +18,12 @@ function create_service_user() {
     local SERVICE_NAME="$1"
     local SERVICE_PASSWORD="$2"
 
-    openstack --insecure user show ${SERVICE_NAME}
+    openstack user show ${SERVICE_NAME}
 
     if [ $? -eq 1 ]
     then
-        openstack --insecure user create --password ${SERVICE_PASSWORD} ${SERVICE_NAME}
-        openstack --insecure role add --user ${SERVICE_NAME} --project service admin
+        openstack user create --password ${SERVICE_PASSWORD} ${SERVICE_NAME}
+        openstack role add --user ${SERVICE_NAME} --project service admin
     fi
 }
 
@@ -29,11 +32,11 @@ function create_service() {
   local SERVICE_TYPE=$2
   local SERVICE_DESCRIPTION="$3"
 
-  openstack --insecure service show ${SERVICE_NAME}
+  openstack service show ${SERVICE_NAME}
 
   if [ $? -eq 1 ]
   then
-      openstack --insecure service create --name ${SERVICE_NAME} \
+      openstack service create --name ${SERVICE_NAME} \
                                           --description "${SERVICE_DESCRIPTION}" \
                                           ${SERVICE_TYPE}
   fi
@@ -45,7 +48,7 @@ function create_service_endpoint() {
   local ENDPOINT=$3 
   local REGION=$4
 
-  openstack --insecure endpoint list | \
+  openstack endpoint list | \
       grep ${REGION} | \
       grep ${SERVICE_TYPE} | \
       grep ${ENDPOINT_TYPE} | \
@@ -53,7 +56,7 @@ function create_service_endpoint() {
 
   if [ $? -eq 1 ]
   then
-      openstack --insecure endpoint create --region ${REGION} \
+      openstack endpoint create --region ${REGION} \
                                           ${SERVICE_TYPE} \
                                           ${ENDPOINT_TYPE} \
                                           ${ENDPOINT}
@@ -70,11 +73,11 @@ function initialize_service() {
     local ADMIN_ENDPOINT=$7
     local REGION=$8
 
-    openstack --insecure project show service
+    openstack project show service
 
     if [ $? -eq 1 ]
     then
-        openstack --insecure project create service --description "General service project"
+        openstack project create service --description "General service project"
     fi
 
     create_service_user ${SERVICE_NAME} ${SERVICE_PASSWORD}
@@ -87,7 +90,7 @@ function initialize_service() {
 export OS_USERNAME=admin
 export OS_PASSWORD=${KEYSTONE_ADMIN_PASSWORD}
 export OS_TENANT_NAME=admin
-export OS_AUTH_URL=https://${CONTROL_HOST_IP}:5000/v3
+export OS_AUTH_URL=http://${CONTROL_HOST_IP}:5000/v3
 export OS_REGION_NAME=RegionOne
 export OS_IDENTITY_API_VERSION=3
 
