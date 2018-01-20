@@ -81,23 +81,9 @@ SERVICE_CONTAINERS = service-keystone \
 					 service-glance \
 					 service-swift \
 					 service-neutron \
-					 service-ironic
+					 service-ironic \
+					 service-nova 
 
 $(SERVICE_CONTAINERS):
 	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
 		service-containers/$(subst service-,$(EMPTY),$@)
-
-NOVA_TARGETS = nova-base \
-			   nova-database \
-			   nova-api \
-			   nova-conductor \
-			   nova-scheduler \
-			   nova-compute \
-			   nova-placement
-
-TARGETS = $(NOVA_TARGETS)
-
-all: $(TARGETS)
-
-$(TARGETS):
-	$(build) $(subst _,-,$(subst -,/,$@)) --tag $@:centos
