@@ -1,15 +1,7 @@
 ./20-RUNONCE-service-endpoints.sh
 ./21-neutron-database.sh
-./23-ironic-database.sh
 ./24-nova-database.sh
-./26-swift-ring.sh
 ./34-RUNONCE-neutron-provider.sh
-./60-ironic-api.sh
-./61-ironic-imagedata.sh
-./62-ironic-tftp.sh
-./63-ironic-nginx.sh
-./65-ironic-conductor.sh
-./67-ironic-agent.sh
 ./70-nova-placement.sh
 ./71-nova-api.sh
 ./72-nova-conductor.sh

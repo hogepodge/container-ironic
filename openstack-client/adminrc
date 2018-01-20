@@ -1,6 +1,6 @@
 export OS_USERNAME=admin
 export OS_PASSWORD=${KEYSTONE_ADMIN_PASSWORD}
 export OS_TENANT_NAME=admin
-export OS_AUTH_URL=https://${CONTROL_HOST_IP}:5000
+export OS_AUTH_URL=http://${CONTROL_HOST_IP}:5000
 export OS_REGION_NAME=RegionOne
 export OS_IDENTITY_API_VERSION=3

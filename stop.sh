@@ -1,11 +1,6 @@
 docker stop \
             dnsmasq-ipmi \
-            keystone \
             neutron-provider \
-            ironic-api \
-            ironic-tftp \
-            ironic-nginx \
-            ironic-conductor \
             nova-api \
             nova-scheduler \
             nova-conductor \
@@ -15,13 +10,7 @@ docker stop \
 
 docker rm \
           dnsmasq-ipmi \
-          keystone \
           neutron-provider \
-          ironic-api \
-          ironic-conductor \
-          ironic-tftp \
-          ironic-nginx \
-          ironic-agent \
           nova-api \
           nova-scheduler \
           nova-conductor \

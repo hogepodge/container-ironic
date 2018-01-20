@@ -30,8 +30,6 @@ services:
         links:
             - 'mariadb'
             - 'rabbitmq'
-        volumes:
-            - './ssl:/etc/ssl'
         command: '/start-keystone-api.sh'
         depends_on:
             - 'mariadb'
@@ -48,7 +46,6 @@ services:
             - '8888:8080'
         volumes:
             - '/dev/loop0:/dev/loop1'
-            - './ssl:/etc/ssl'
         networks:
             swiftnet:
                 ipv4_address: '172.16.16.16'
@@ -67,8 +64,6 @@ services:
             - 'rabbitmq'
         ports:
             - '9292:9292'
-        volumes:
-            - './ssl:/etc/ssl'
         depends_on:
             - 'mariadb'
             - 'rabbitmq'
@@ -87,8 +82,6 @@ services:
             - 'rabbitmq'
         ports:
             - '9291:9291'
-        volumes:
-            - './ssl:/etc/ssl'
         depends_on:
             - 'mariadb'
             - 'rabbitmq'
@@ -107,8 +100,6 @@ services:
             - 'rabbitmq'
         ports:
             - '9696:9696'
-        volumes:
-            - './ssl:/etc/ssl'
         depends_on:
             - 'mariadb'
             - 'rabbitmq'
@@ -121,8 +112,6 @@ services:
         hostname: 'neutron-linuxbridge-agent'
         privileged: true
         network_mode: 'host'
-        volumes:
-            - './ssl:/etc/ssl'
         cap_add:
             - ALL
         depends_on:
@@ -138,8 +127,6 @@ services:
         hostname: 'neutron-dhcp-agent'
         privileged: true
         network_mode: 'host'
-        volumes:
-            - './ssl:/etc/ssl'
         cap_add:
             - 'ALL'
             - 'NET_ADMIN'
@@ -158,8 +145,6 @@ services:
         hostname: 'neutron-metadata-agent'
         privileged: true
         network_mode: 'host'
-        volumes:
-            - './ssl:/etc/ssl'
         cap_add:
             - 'NET_ADMIN'
         depends_on:
@@ -181,7 +166,6 @@ services:
         ports:
             - '6385:6385'
         volumes:
-            - './ssl:/etc/ssl'
             - 'ironic-imagedata-volume:/imagedata'
         depends_on:
             - 'mariadb'
@@ -197,7 +181,6 @@ services:
         env_file: './config'
         hostname: 'ironic-conductor'
         volumes:
-            - './ssl:/etc/ssl'
             - 'ironic-imagedata-volume:/imagedata'
             - '/dev:/dev:rw'
         privileged: true 
@@ -219,7 +202,6 @@ services:
         ports:
             - '69:69/udp'
         volumes:
-            - './ssl:/etc/ssl'
             - 'ironic-imagedata-volume:/imagedata'
         command: '/start-ironic-tftp.sh'
 
@@ -242,7 +224,6 @@ services:
         privileged: true
         network_mode: 'host'
         volumes:
-            - './ssl:/etc/ssl'
             - '/dev/disk:/dev/disk'
         command: '/start-ironic-iscsid.sh'
 
