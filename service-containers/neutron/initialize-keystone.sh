@@ -1,6 +1,12 @@
 #!/bin/bash
 set -x
 
+until $(curl --output /dev/null --silent --head --fail --insecure https://${CONTROL_HOST_IP}:5000); do
+    printf '.'
+    sleep 5
+done
+
+
 SERVICE_NAME=neutron
 SERVICE_TYPE=network
 SERVICE_DESCRIPTION="OpenStack Networking Service"

@@ -1,6 +1,11 @@
 #!/bin/bash
 set -x
 
+until $(curl --output /dev/null --silent --head --fail --insecure https://${CONTROL_HOST_IP}:5000); do
+    printf '.'
+    sleep 5
+done
+
 SERVICE_NAME=swift
 SERVICE_TYPE=object-store
 SERVICE_DESCRIPTION="OpenStack Object Service"

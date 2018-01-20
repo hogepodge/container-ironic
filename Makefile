@@ -68,105 +68,11 @@ SERVICE_CONTAINERS = service-keystone \
 					 service-glance \
 					 service-swift \
 					 service-neutron \
+					 service-ironic
 
 $(SERVICE_CONTAINERS):
 	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
 		service-containers/$(subst service-,$(EMPTY),$@)
-
-start-keystone-api:
-	$(run) -d \
-		--env-file ./config \
-		--hostname keystone \
-		--name keystone-api \
-		--link=rabbitmq:rabbitmq \
-		--link=mariadb:mariadb \
-        -p=5000:5000 -p=35357:35357  \
-		--volume=/home/hoge/container-ironic/ssl:/etc/ssl \
-		$(DOCKERHUB_NAMESPACE)/service-keystone:$(OPENSTACK_RELEASE)-centos \
-		/start-keystone-api.sh
-
-stop-keystone-api:
-	$(stop) keystone-api
-
-clean-keystone-api: stop-keystone-api
-	$(remove) keystone-api
-
-start-glance-api:
-	$(run) -d \
-           --env-file ./config \
-           --hostname glance-api \
-           --name glance-api \
-           --link=rabbitmq:rabbitmq \
-           --link=mariadb:mariadb \
-           -p=9292:9292 \
-           $(DOCKERHUB_NAMESPACE)/service-glance:pike-centos \
-		   /start-glance-api.sh
-
-stop-glance-api:
-	$(stop) glance-api
-
-clean-glance-api: stop-glance-api
-	$(remove) glance-api
-
-start-glance-registry:
-	$(run) -d \
-           --env-file ./config \
-           --hostname glance-registry \
-           --name glance-registry \
-           --link=rabbitmq:rabbitmq \
-           --link=mariadb:mariadb \
-           -p=9191:9191 \
-           $(DOCKERHUB_NAMESPACE)/service-glance:pike-centos \
-		   /start-glance-registry.sh
-
-stop-glance-registry:
-	$(stop) glance-registry
-
-clean-glance-registry: stop-glance-registry
-	$(remove) glance-registry
-
-create-swiftnet:
-	docker network create --subnet 172.16.16.0/24 swiftnet
-
-destroy-swiftnet: stop-swift-proxy
-	docker network rm swiftnet
-
-start-swift-proxy:
-	$(run) -d \
-           -v /dev/loop1:/dev/loop1 \
-           --net swiftnet \
-           --ip 172.16.16.16 \
-           --env-file ./config \
-           --hostname swift \
-           --name swift-proxy \
-           --privileged \
-           -p=8888:8080 \
-           --rm \
-           $(DOCKERHUB_NAMESPACE)/service-swift:pike-centos \
-           /start-service.sh
-
-stop-swift-proxy:
-	$(stop) swift-proxy
-
-clean-swift-proxy: stop-swift-proxy
-	$(remove) swift-proxy
-
-start-neutron-server:
-	$(run) -d \
-           --env-file ./config \
-           --hostname neutron-server \
-           --name neutron-server \
-           --link=rabbitmq:rabbitmq \
-           --link=mariadb:mariadb \
-           -p=9696:9696 \
-           $(DOCKERHUB_NAMESPACE)/service-neutron:pike-centos \
-		   /start-neutron-server.sh
-
-stop-neutron-server:
-	$(stop) neutron-server
-
-clean-neutron-server: stop-neutron-server
-	$(remove) neutron-server
 
 start-neutron-linuxbridge-agent:
 	$(run) -d \
@@ -218,6 +124,71 @@ stop-neutron-metadata-agent:
 
 clean-neutron-metadata-agent: stop-neutron-metadata-agent
 	$(remove) neutron-metadata-agent
+
+start-ironic-api:
+	$(run) -d \
+           -v ironic-imagedata-volume:/imagedata \
+           --env-file ./config \
+           --hostname ironic-api \
+           --name ironic-api \
+           --link=rabbitmq:rabbitmq \
+           --link=mariadb:mariadb \
+           -p=6385:6385 \
+           $(DOCKERHUB_NAMESPACE)/service-ironic:pike-centos \
+		   /start-ironic-api.sh
+
+stop-ironic-api:
+	$(stop) ironic-api
+
+clean-ironic-api: stop-ironic-api
+	$(remove) ironic-api
+
+start-ironic-tftp:
+	$(run) -d \
+           -v ironic-imagedata-volume:/imagedata \
+           --name ironic-tftp \
+           -p 69:69/udp \
+           $(DOCKERHUB_NAMESPACE)/service-ironic:pike-centos \
+		   /start-ironic-tftp.sh
+
+stop-ironic-tftp:
+	$(stop) ironic-tftp
+
+clean-ironic-tftp: stop-ironic-tftp
+	$(remove) ironic-tftp
+
+start-ironic-nginx:
+	$(run) -d \
+           -v ironic-imagedata-volume:/imagedata \
+           --name ironic-nginx \
+           -p 8080:8080 \
+           $(DOCKERHUB_NAMESPACE)/service-ironic:pike-centos \
+           /start-ironic-nginx.sh
+
+stop-ironic-nginx:
+	$(stop) ironic-nginx
+
+clean-ironic-nginx: stop-ironic-nginx
+	$(remove)
+
+start-ironic-conductor:
+	$(run) -d \
+           -v ironic-imagedata-volume:/imagedata \
+           -v /dev:/dev:rw \
+           --env-file ./config \
+           --hostname ironic-conductor \
+           --name ironic-conductor \
+           --privileged \
+           --net=host \
+           -p 3260:3260 \
+           $(DOCKERHUB_NAMESPACE)/service-ironic:pike-centos \
+		   /start-ironic-conductor.sh
+
+stop-ironic-conductor:
+	$(stop) ironic-conductor
+
+clean-ironic-conductor: stop-ironic-conductor
+	$(remove)
 
 IRONIC_TARGETS = ironic-base \
 				 ironic-database \

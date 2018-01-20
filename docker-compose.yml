@@ -1,0 +1,157 @@
+version: '2.2'
+services:
+    mariadb:
+        image: 'mariadb:10.1.22'
+        env_file: './config'
+        environment:
+            MARIADB_EXTRA_FLAGS: '--max-connections=2000'
+        hostname: 'mariadb'
+        ports:
+            - '3306:3306'
+        volumes: 
+            - 'mariadb-volume:/var/lib/mysql'
+
+    rabbitmq:
+        image: 'rabbitmq:3'
+        env_file: './config'
+        hostname: 'rabbitmq'
+        ports:
+            - '5672:5672'
+
+    keystone-api:
+        build: 'service-containers/keystone/.'
+        env_file: './config'
+        hostname: 'keystone'
+        ports:
+            - '5000:5000'
+            - '35357:35357'
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        volumes:
+            - './ssl:/etc/ssl'
+        command: '/start-keystone-api.sh'
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+
+    swift-proxy:
+        build: 'service-containers/swift/.'
+        env_file: './config'
+        hostname: 'swift'
+        privileged: true
+        ports:
+            - '8888:8080'
+        volumes:
+            - '/dev/loop0:/dev/loop1'
+        networks:
+            swiftnet:
+                ipv4_address: '172.16.16.16'
+        command: '/start-service.sh'
+        depends_on:
+            - 'keystone-api'
+
+    glance-api:
+        build: 'service-containers/glance/.'
+        env_file: './config'
+        hostname: 'glance-api'
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        ports:
+            - '9292:9292'
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+            - 'keystone-api'
+            - 'swift-proxy'
+        command: '/start-glance-api.sh'
+
+    glance-registry:
+        build: 'service-containers/glance/.'
+        env_file: './config'
+        hostname: 'glance-registry'
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        ports:
+            - '9291:9291'
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+            - 'keystone-api'
+            - 'glance-api'
+        command: '/start-glance-registry.sh'
+
+    neutron-server:
+        build: 'service-containers/neutron/.'
+        env_file: './config'
+        hostname: 'neutron-server'
+        links:
+            - 'mariadb'
+            - 'rabbitmq'
+        ports:
+            - '9696:9696'
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+            - 'keystone-api'
+        command: '/start-neutron-server.sh'
+
+    neutron-linuxbridge-agent:
+        build: 'service-containers/neutron/.'
+        env_file: './config'
+        hostname: 'neutron-linuxbridge-agent'
+        privileged: true
+        network_mode: 'host'
+        cap_add:
+            - ALL
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+            - 'keystone-api'
+            - 'neutron-server'
+        command: '/start-neutron-linuxbridge-agent.sh'
+
+    neutron-dhcp-agent:
+        build: 'service-containers/neutron/.'
+        env_file: './config'
+        hostname: 'neutron-dhcp-agent'
+        privileged: true
+        network_mode: 'host'
+        cap_add:
+            - 'ALL'
+            - 'NET_ADMIN'
+        sysctls:
+            net.ipv4.conf.all.promote_secondaries: 1
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+            - 'keystone-api'
+            - 'neutron-server'
+        command: '/start-neutron-dhcp-agent.sh'
+
+    neutron-metadata-agent:
+        build: 'service-containers/neutron/.'
+        env_file: './config'
+        hostname: 'neutron-metadata-agent'
+        privileged: true
+        network_mode: 'host'
+        cap_add:
+            - 'NET_ADMIN'
+        depends_on:
+            - 'mariadb'
+            - 'rabbitmq'
+            - 'keystone-api'
+            - 'neutron-server'
+        command: '/start-neutron-metadata-agent.sh'
+
+volumes:
+    mariadb-volume:
+
+networks:
+    swiftnet:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 172.16.16.0/24

@@ -1,4 +1,5 @@
 #!/bin/bash
+/generate.configs.sh
 /initialize-keystone.sh
 /initialize-neutron-database.sh
 neutron-server \

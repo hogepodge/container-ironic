@@ -1,12 +1,6 @@
 FROM hogepodge/loci-keystone:pike-centos
 MAINTAINER chris@openstack.org
 EXPOSE 5000 35357
-ADD /wait-for-it.sh /wait-for-it.sh
-ADD /start-keystone-api.sh /start-keystone-api.sh
-ADD /wsgi-keystone.conf /wsgi-keystone.conf
-ADD /keystone-paste.ini /etc/keystone/keystone-paste.ini
-ADD /generate.keystone.conf /generate.keystone.conf
-ADD /generate.httpd.conf /generate.httpd.conf
 RUN set -x \
     mkdir /etc/ssl \
     && yum upgrade -y \
@@ -17,3 +11,9 @@ RUN set -x \
                    mariadb \
                    which; \
     yum clean all;
+ADD /wait-for-it.sh /wait-for-it.sh
+ADD /start-keystone-api.sh /start-keystone-api.sh
+ADD /wsgi-keystone.conf /wsgi-keystone.conf
+ADD /keystone-paste.ini /etc/keystone/keystone-paste.ini
+ADD /generate.keystone.conf /generate.keystone.conf
+ADD /generate.httpd.conf /generate.httpd.conf

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/wait-for-it.sh mariadb:3306 -t 30
+/wait-for-it.sh --host=mariadb --port=3306 -t 60
 
 # Create the initial database user
 cat > /tmp/create_database.sql <<-EOF
@@ -35,4 +35,5 @@ keystone-manage bootstrap --bootstrap-password $KEYSTONE_ADMIN_PASSWORD \
   --bootstrap-region-id RegionOne
 
 # Start apache
+rm -f /var/run/httpd/*
 httpd -k start -D FOREGROUND
