@@ -1,5 +1,7 @@
 #!/bin/bash
 
+/wait-for-it.sh --host=${CONTROL_HOST_IP} --port=3306 -t 60
+
 cat > /tmp/create_database.sql <<-EOF
 CREATE DATABASE IF NOT EXISTS nova CHARACTER SET utf8;
 GRANT ALL PRIVILEGES ON nova.* TO 'nova'@'localhost' \
