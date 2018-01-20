@@ -1,9 +1,0 @@
-./20-RUNONCE-service-endpoints.sh
-./21-neutron-database.sh
-./24-nova-database.sh
-./34-RUNONCE-neutron-provider.sh
-./70-nova-placement.sh
-./71-nova-api.sh
-./72-nova-conductor.sh
-./73-nova-scheduler.sh
-./74-nova-compute.sh
