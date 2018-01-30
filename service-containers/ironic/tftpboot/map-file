@@ -1,2 +1,4 @@
-r ^([^/]) /tftpboot/\1
-r ^(/tftpboot/) /tftpboot/\2
+re ^(/tftpboot/) /imagedata/tftpboot/\2
+re ^/tftpboot/ /imagedata/tftpboot/
+re ^(^/) /imagedata/tftpboot/\1
+re ^([^/]) /imagedata/tftpboot/\1

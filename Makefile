@@ -23,6 +23,9 @@ kernel-modules:
 	sudo modprobe iscsi_tcp
 	sudo modprobe ip6_tables
 	sudo modprobe ebtables
+	sudo modprobe ip_conntrack
+	sudo modprobe ip_conntrack_ftp
+	sudo modprobe ip_nat_ftp
 
 ##### Swift Storage Directory
 # Make the loopback device to hold swift storage data
@@ -84,6 +87,9 @@ SERVICE_CONTAINERS = service-keystone \
 					 service-ironic \
 					 service-nova 
 
+service-containers: $(SERVICE_CONTAINERS)
+
 $(SERVICE_CONTAINERS):
 	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
 		service-containers/$(subst service-,$(EMPTY),$@)
+	$(push)/$@:$(OPENSTACK_RELEASE)-centos

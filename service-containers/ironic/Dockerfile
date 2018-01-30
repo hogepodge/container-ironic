@@ -1,6 +1,5 @@
 FROM hogepodge/loci-ironic:pike-centos
 MAINTAINER chris@openstack.org
-EXPOSE 6385 3260 69 69/udp 8080 8080/udp
 ADD /generate.ironic.conf /generate.ironic.conf
 ADD /initialize-imagedata.sh /initialize-imagedata.sh
 ADD /initialize-ironic-database.sh /initialize-ironic-database.sh

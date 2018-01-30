@@ -9,19 +9,12 @@ OpenStack Ironic deployment is:
 - Container-based.
 - Uses all of the core OpenStack projects, with Ironic as a Nova driver.
 
-As of January 1, 2018, this project can successfully deploy Ironic and
+As of January 29, 2018, this project can successfully deploy Ironic and
 manage a home lab. However, it is still a work in progress with many
 features planned for the roadmap. Features include:
 
 - Better documentation, this `README.rst` file being the first step in
   that direction.
-- Stronger automation. I'm moving away from the script-based deployment
-  and moving to a Makefile. Work in progress on that, and as the
-  Makefile becomes more sophisticated the documentation will replace the
-  implicit bash script ordering.
-- Fewer containers. Right now I build a new container for every service.
-  My intention is to reduce the number of container builds in favor of
-  creating state through config drives.
 
 This is very much my own project for maintaining a home lab, and if you
 want to use the project you will likely need to modify it. The goal is
@@ -44,13 +37,20 @@ storage. Export the name of you Docker Hub namespace into the
 You can the then build the Loci images by running `make loci`. This will
 build the base loci images and push them to your Docker Hub account.
 
-Follow up with building the application images by running `make all`.
-This will do local builds of all of the application images.
+Follow up with building the application images by running
+`make service-containers`. This will do local builds of all of the
+application images.
 
 Configure your deployment by editing the `config` file with your
 environment specific values.
 
-Deploy by running the shell scripts in numerical order.
+Load necessary kernel modules by running `make kernel-modules`.
+
+Bring the whole thing up with `docker-compose up`.
+
+If you need to restart the services, you must call `docker-compose down`
+to clear out existing containers, or you will run into network problems
+with the neutron-dhcp-agent.
 
 Have a good time with OpenStack!
 
@@ -63,5 +63,9 @@ Step-by-step `make` and `docker-compose` commands
     * `make swift-storage`
 * Build the Loci images and push them to Docker Hub
     * `make loci`
+* Build the service containers (optional)
+    * `make service-containers`
 * Start the services with `docker-compose`
     * `docker-compose up`
+* If you need to restart the services, you must run 
+    * `docker-compose down`

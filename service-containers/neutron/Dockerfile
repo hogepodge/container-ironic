@@ -1,6 +1,5 @@
 FROM hogepodge/loci-neutron:pike-centos
 MAINTAINER chris@openstack.org
-EXPOSE 9696
 RUN set -x \
     && yum upgrade -y \
     && yum install -y \

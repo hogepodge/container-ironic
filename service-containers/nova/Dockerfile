@@ -1,6 +1,5 @@
 FROM hogepodge/loci-nova:pike-centos
 MAINTAINER chris@openstack.org
-EXPOSE 8774 8778
 RUN yum upgrade -y \
     && yum install -y epel-release \
     && yum install -y \

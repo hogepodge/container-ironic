@@ -1,6 +1,5 @@
 FROM hogepodge/loci-keystone:pike-centos
 MAINTAINER chris@openstack.org
-EXPOSE 5000 35357
 RUN set -x \
     mkdir /etc/ssl \
     && yum upgrade -y \

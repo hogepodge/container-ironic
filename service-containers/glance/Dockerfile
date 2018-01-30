@@ -1,6 +1,5 @@
 FROM hogepodge/loci-glance:pike-centos
 MAINTAINER chris@openstack.org
-EXPOSE 9292 9191
 RUN yum upgrade -y \
  && yum install -y \
                 gcc \

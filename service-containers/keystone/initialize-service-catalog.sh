@@ -4,6 +4,9 @@ set -x
 
 /wait-for-it.sh ${CONTROL_HOST}:35357 -t 30
 
+# because we can't actually trust MariaDB to be ready
+sleep 5
+
 function create_service_user() {
   SERVICE_NAME="$1"
   SERVICE_PASSWORD="$2"
