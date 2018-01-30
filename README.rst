@@ -67,5 +67,8 @@ Step-by-step `make` and `docker-compose` commands
     * `make service-containers`
 * Start the services with `docker-compose`
     * `docker-compose up`
-* If you need to restart the services, you must run 
+* If you need to restart the services (with your database and images
+  intact), you must run 
     * `docker-compose down`
+* If you want to restart the services with an empty database
+    * `docker-compose down -v`
