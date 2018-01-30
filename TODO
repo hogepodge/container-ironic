@@ -1,3 +1,2 @@
-* get neutron network and set CLEANING_NETWORK and PROVISIONING_NETWORK
 * set swift glance account `openstack object store account show`
 * create tempkey `openstack object store account set --property Temp-Url-Key=${SWIFT_TEMP_URL_KEY}`
