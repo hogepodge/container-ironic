@@ -1,7 +1,7 @@
 Container Ironic
 ================
 This project is a container deployment of a full-stack Ironic for
-managing a home bare-metal lab. What do I mean by "full-stack"? In
+managing a home bare-metal lab. What do I mean by "full-stack?" In
 contrast to a project like
 `Bifrost <http://git.openstack.org/cgit/openstack/bifrost/>`, this
 OpenStack Ironic deployment is:
