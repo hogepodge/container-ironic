@@ -93,3 +93,14 @@ $(SERVICE_CONTAINERS):
 	$(build) --tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos \
 		service-containers/$(subst service-,$(EMPTY),$@)
 	$(push)/$@:$(OPENSTACK_RELEASE)-centos
+
+#### OpenStack Client
+# Build the OpenStack Client
+#
+# make openstack-client
+####
+
+openstack-client:
+	$(build) service-containers/openstack-client/. \
+		--tag $(DOCKERHUB_NAMESPACE)/$@:$(OPENSTACK_RELEASE)-centos
+	$(push)/$@:$(OPENSTACK_RELEASE)-centos

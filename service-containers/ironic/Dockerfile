@@ -1,5 +1,6 @@
 FROM hogepodge/loci-ironic:pike-centos
 MAINTAINER chris@openstack.org
+ADD /assign-temp-url-key.sh /assign-temp-url-key.sh
 ADD /generate.ironic.conf /generate.ironic.conf
 ADD /initialize-imagedata.sh /initialize-imagedata.sh
 ADD /initialize-ironic-database.sh /initialize-ironic-database.sh
@@ -13,6 +14,7 @@ ADD /upload-agent.sh /upload-agent.sh
 ADD /wait-for-it.sh /wait-for-it.sh
 ADD /adminrc /adminrc
 ADD /boot.ipxe /etc/ironic/boot.ipxe
+ADD /glancerc /glancerc
 ADD /nginx.conf /etc/nginx/nginx.conf
 RUN yum update -y \
  && yum install -y epel-release \

@@ -24,6 +24,8 @@ done
 
 /initialize-keystone.sh
 /initialize-ironic-database.sh
+/assign-temp-url-key.sh
+
 /upload-agent.sh
 
 ironic-api
