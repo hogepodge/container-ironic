@@ -10,7 +10,7 @@ RUN set -x \
                    supervisor \
                    vim \
                    gcc \
-                   pyton-devel \
+                   python-devel \
                    wget \
                    curl \
                    which \

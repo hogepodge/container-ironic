@@ -44,7 +44,7 @@ services:
         env_file: './config'
         hostname: 'keystone'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         ports:
             - '5000:5000'
             - '35357:35357'
@@ -64,7 +64,7 @@ services:
         env_file: './config'
         hostname: 'swift'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         privileged: true
         ports:
             - '8888:8080'
@@ -86,7 +86,7 @@ services:
         env_file: './config'
         hostname: 'glance-api'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -106,7 +106,7 @@ services:
         env_file: './config'
         hostname: 'glance-registry'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -126,7 +126,7 @@ services:
         env_file: './config'
         hostname: 'neutron-server'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -201,7 +201,7 @@ services:
         env_file: './config'
         hostname: 'ironic-api'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -258,7 +258,7 @@ services:
         env_file: './config'
         hostname: 'ironic-nginx'
         extra_hosts:
-            - 'control:192.168.1.44'
+            - 'control:192.168.1.6'
         ports: 
             - '8080:8080'
         expose:
@@ -282,7 +282,7 @@ services:
         env_file: './config'
         hostname: 'nova-api'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -304,7 +304,7 @@ services:
         env_file: './config'
         hostname: 'nova-placement'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -325,7 +325,7 @@ services:
         env_file: './config'
         hostname: 'nova-conductor'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -342,7 +342,7 @@ services:
         env_file: './config'
         hostname: 'nova-scheduler'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'
@@ -359,7 +359,7 @@ services:
         env_file: './config'
         hostname: 'nova-compute'
         extra_hosts:
-            - "control:192.168.1.44"
+            - "control:192.168.1.6"
         links:
             - 'mariadb'
             - 'rabbitmq'

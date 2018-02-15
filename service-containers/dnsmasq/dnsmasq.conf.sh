@@ -25,3 +25,5 @@ DHCP_HOST_ENTRIES=`env | grep  "DHCP_HOST_[0-9]\+" | sed 's/DHCP_HOST_[0-9]\+=//
 cat >> /etc/dnsmasq.conf <<-EOF
 ${DHCP_HOST_ENTRIES}
 EOF
+
+cat /etc/dnsmasq.conf
