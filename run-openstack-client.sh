@@ -3,4 +3,4 @@ docker run \
     --env-file config \
     -it \
     -v $PWD/images:/images \
-    openstack-client:centos bash
+    hogepodge/openstack-client:pike-centos bash
