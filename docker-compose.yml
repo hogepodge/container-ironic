@@ -27,6 +27,20 @@ services:
         expose:
             - '5672'
 
+    etcd:
+        build: 'service-containers/etcd'
+        env_file: './config'
+        network_mode: 'host'
+        ports:
+            - '2379:2379'
+            - '4001:4001'
+            - '2380:2380'
+        expose:
+            - '2379'
+            - '4001'
+            - '2380'
+        command: '/start-etcd.sh'
+
     dnsmasq-ipmi:
         build: 'service-containers/dnsmasq'
         env_file: './config'
