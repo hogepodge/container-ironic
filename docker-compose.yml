@@ -41,6 +41,12 @@ services:
             - '2380'
         command: '/start-etcd.sh'
 
+    calico:
+        build: 'service-containers/calico'
+        env_file: './config'
+        network_mode: 'host'
+        command: 'echo Hello'
+
     dnsmasq-ipmi:
         build: 'service-containers/dnsmasq'
         env_file: './config'

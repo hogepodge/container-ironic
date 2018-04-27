@@ -1,7 +1,9 @@
-FROM hogepodge/loci-neutron:pike-centos
+FROM hogepodge/loci-neutron:queens-centos
 MAINTAINER chris@openstack.org
+ADD calico.repo /etc/yum.repos.d/calico.repo
 RUN set -x \
     && yum upgrade -y \
+    && yum install -y epel-release \
     && yum install -y \
                    gcc \
                    python-devel \
@@ -24,11 +26,16 @@ RUN set -x \
                    haproxy \
                    iproute \
                    git \
-    && yum install -y epel-release \
+                   calico-control \
+                   calico-dhcp-agent \
+                   calico-compute \
+                   bird \
+                   bird6 \
     && yum install -y python-pip \
     && yum clean all \
     && pip install --upgrade pip \
-    && pip install python-openstackclient
+    && pip install python-openstackclient \
+                   etcd3gw
 ADD /etc/neutron/ /etc/neutron/
 ADD /generate.configs.sh /generate.configs.sh
 ADD /generate.linuxbridge_agent.ini /generate.linuxbridge_agent.ini

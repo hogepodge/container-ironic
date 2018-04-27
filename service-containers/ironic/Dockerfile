@@ -1,4 +1,4 @@
-FROM hogepodge/loci-ironic:pike-centos
+FROM hogepodge/loci-ironic:queens-centos
 MAINTAINER chris@openstack.org
 ADD /assign-temp-url-key.sh /assign-temp-url-key.sh
 ADD /generate.ironic.conf /generate.ironic.conf

@@ -1,5 +1,6 @@
-FROM hogepodge/loci-nova:pike-centos
+FROM hogepodge/loci-nova:queens-centos
 MAINTAINER chris@openstack.org
+ADD calico.repo /etc/yum.repos.d/calico.repo
 RUN yum upgrade -y \
     && yum install -y epel-release \
     && yum install -y \
@@ -15,8 +16,15 @@ RUN yum upgrade -y \
         openvswitch \
         python-pip \
         which \
+        calico-control \
+        calico-dhcp-agent \
+        calico-compute \
+        bird \
+        bird6 \
     && pip install --upgrade pip \
-    && pip install python-ironicclient python-openstackclient
+    && pip install python-ironicclient \
+                   python-openstackclient \
+                   etcd3gw
 ADD /etc/nova/ /etc/nova/
 ADD /generate.nova.conf /generate.nova.conf
 ADD /nova_sudoers /etc/sudoers.d/nova_sudoers

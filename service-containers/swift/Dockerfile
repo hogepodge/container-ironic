@@ -1,4 +1,4 @@
-FROM hogepodge/loci-swift:pike-centos
+FROM hogepodge/loci-swift:queens-centos
 MAINTAINER chris@openstack.org
 # Swift implementation taken from https://github.com/ccollicutt/docker-swift-onlyone
 RUN set -x \

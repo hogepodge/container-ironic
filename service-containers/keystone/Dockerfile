@@ -1,4 +1,4 @@
-FROM hogepodge/loci-keystone:pike-centos
+FROM hogepodge/loci-keystone:queens-centos
 MAINTAINER chris@openstack.org
 RUN set -x \
     mkdir /etc/ssl \
