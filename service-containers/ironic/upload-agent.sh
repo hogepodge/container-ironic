@@ -5,17 +5,17 @@ set -x
 
 source /adminrc
 
-curl -o tinyapi-stable-pike.tar.gz \
-  http://tarballs.openstack.org/ironic-python-agent/tinyipa/tinyipa-stable-pike.tar.gz
+curl -o tinyapi-stable-queens.tar.gz \
+  http://tarballs.openstack.org/ironic-python-agent/tinyipa/tinyipa-stable-queens.tar.gz
 
-tar -xvzf tinyapi-stable-pike.tar.gz
+tar -xvzf tinyapi-stable-queens.tar.gz
 
 openstack image create \
   --shared \
   --id 11111111-1111-1111-1111-111111111110 \
   --disk-format aki \
   --container-format aki \
-  --file tinyipa-stable-pike.vmlinuz \
+  --file tinyipa-stable-queens.vmlinuz \
   tinyipa.vmlinuz
 
 openstack image create \
@@ -23,7 +23,7 @@ openstack image create \
   --id 11111111-1111-1111-1111-111111111111 \
   --disk-format ari \
   --container-format ari \
-  --file tinyipa-stable-pike.gz \
+  --file tinyipa-stable-queens.gz \
   tinyipa.ramdisk
 
-rm tinyipa-stable-pike.vmlinuz tinyipa-stable-pike.gz tinyapi-stable-pike.tar.gz
+rm tinyipa-stable-queens.vmlinuz tinyipa-stable-queens.gz tinyapi-stable-queens.tar.gz

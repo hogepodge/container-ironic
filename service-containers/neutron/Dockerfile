@@ -1,4 +1,4 @@
-FROM hogepodge/loci-neutron:pike-centos
+FROM hogepodge/loci-neutron:queens-centos
 MAINTAINER chris@openstack.org
 RUN set -x \
     && yum upgrade -y \

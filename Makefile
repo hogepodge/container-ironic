@@ -3,7 +3,7 @@
 #
 ####
 
-OPENSTACK_RELEASE=pike
+OPENSTACK_RELEASE=queens
 DOCKERHUB_NAMESPACE=hogepodge
 EMPTY:=
 
@@ -64,7 +64,7 @@ loci-build-base:
 	$(push)/base:centos
 
 $(LOCI_PROJECTS):
-	$(build) https://git.openstack.org/openstack/loci.git \
+	$(build) /tmp/loci \
 		--build-arg PROJECT=$(subst loci-,$(EMPTY),$@) \
 		--build-arg PROJECT_REF=stable/$(OPENSTACK_RELEASE) \
 		--build-arg FROM=$(DOCKERHUB_NAMESPACE)/base:centos \
