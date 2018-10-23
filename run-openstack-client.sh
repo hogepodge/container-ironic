@@ -3,4 +3,4 @@ docker run \
     --env-file config \
     -it \
     -v $PWD/images:/images \
-    hogepodge/openstack-client:queens-centos bash
+    hogepodge/openstack-client:rocky-centos bash

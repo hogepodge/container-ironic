@@ -1,4 +1,4 @@
-FROM hogepodge/loci-nova:queens-centos
+FROM hogepodge/loci-nova:rocky-centos
 MAINTAINER chris@openstack.org
 RUN yum upgrade -y \
     && yum install -y epel-release \

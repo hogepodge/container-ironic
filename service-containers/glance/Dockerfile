@@ -1,4 +1,4 @@
-FROM hogepodge/loci-glance:queens-centos
+FROM hogepodge/loci-glance:rocky-centos
 MAINTAINER chris@openstack.org
 RUN yum upgrade -y \
  && yum install -y \

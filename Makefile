@@ -3,7 +3,7 @@
 #
 ####
 
-OPENSTACK_RELEASE=queens
+OPENSTACK_RELEASE=rocky
 DOCKERHUB_NAMESPACE=hogepodge
 EMPTY:=
 
@@ -38,7 +38,7 @@ kernel-modules:
 swift-storage:
 	truncate -s 50G swift-storage
 	mkfs.xfs swift-storage
-	sudo LOOPDEVICE=`losetup --show -f swift-storage`
+	sudo losetup --show -f swift-storage
 
 ##### Loci Containers
 # Building the Loci packages and push them to Docker Hub.
