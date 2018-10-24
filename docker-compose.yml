@@ -9,7 +9,7 @@ services:
         image: 'mariadb:10.1.22'
         env_file: './config'
         environment:
-            MARIADB_EXTRA_FLAGS: '--max-connections=2000'
+            MARIADB_EXTRA_FLAGS: '--max-connections=8192'
         hostname: 'mariadb'
         ports:
             - '3306:3306'
